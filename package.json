@@ -70,5 +70,13 @@
     "vite": "^7.1.12",
     "jsdom": "^26.1.0",
     "@resvg/resvg-js": "^2.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniilak/chuvash-ornaments.git"
+  },
+  "homepage": "https://daniilak.github.io/chuvash-ornaments/",
+  "bugs": {
+    "url": "https://github.com/daniilak/chuvash-ornaments/issues"
   }
 }
