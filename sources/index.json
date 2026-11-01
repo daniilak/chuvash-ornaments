@@ -1,0 +1,256 @@
+{
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source": "https://daniilak.ru/pattern_editor",
+  "count": 31,
+  "patterns": [
+    {
+      "id": "stem",
+      "name": "Ствол",
+      "tag": "STEM",
+      "file": "patterns/stem.json",
+      "segments": 1,
+      "fills": 0
+    },
+    {
+      "id": "stem_half",
+      "name": "Линия ½",
+      "tag": "STEM_HALF",
+      "file": "patterns/stem_half.json",
+      "segments": 1,
+      "fills": 0
+    },
+    {
+      "id": "diag_line",
+      "name": "Диагональ",
+      "tag": "DIAG_LINE",
+      "file": "patterns/diag_line.json",
+      "segments": 1,
+      "fills": 0
+    },
+    {
+      "id": "center",
+      "name": "Ромб",
+      "tag": "CENTER",
+      "file": "patterns/center.json",
+      "segments": 4,
+      "fills": 0
+    },
+    {
+      "id": "center_half",
+      "name": "Ромб ½",
+      "tag": "CENTER_HALF",
+      "file": "patterns/center_half.json",
+      "segments": 4,
+      "fills": 0
+    },
+    {
+      "id": "center_fill",
+      "name": "Ромб заливка",
+      "tag": "CENTER_FILL",
+      "file": "patterns/center_fill.json",
+      "segments": 4,
+      "fills": 1
+    },
+    {
+      "id": "center_half_fill",
+      "name": "Ромб ½ заливка",
+      "tag": "CENTER_HALF_FILL",
+      "file": "patterns/center_half_fill.json",
+      "segments": 4,
+      "fills": 1
+    },
+    {
+      "id": "tri_half_l",
+      "name": "Треугольник Л ½",
+      "tag": "TRI_HALF_L",
+      "file": "patterns/tri_half_l.json",
+      "segments": 3,
+      "fills": 0
+    },
+    {
+      "id": "tri_half_r",
+      "name": "Треугольник П ½",
+      "tag": "TRI_HALF_R",
+      "file": "patterns/tri_half_r.json",
+      "segments": 3,
+      "fills": 0
+    },
+    {
+      "id": "tri_half_l_fill",
+      "name": "Треугольник Л ½ заливка",
+      "tag": "TRI_HALF_L_FILL",
+      "file": "patterns/tri_half_l_fill.json",
+      "segments": 3,
+      "fills": 1
+    },
+    {
+      "id": "tri_half_r_fill",
+      "name": "Треугольник П ½ заливка",
+      "tag": "TRI_HALF_R_FILL",
+      "file": "patterns/tri_half_r_fill.json",
+      "segments": 3,
+      "fills": 1
+    },
+    {
+      "id": "scroll_l",
+      "name": "Завиток Л",
+      "tag": "L_SCROLL",
+      "file": "patterns/scroll_l.json",
+      "segments": 5,
+      "fills": 0
+    },
+    {
+      "id": "scroll_r",
+      "name": "Завиток П",
+      "tag": "R_SCROLL",
+      "file": "patterns/scroll_r.json",
+      "segments": 5,
+      "fills": 0
+    },
+    {
+      "id": "crown_l",
+      "name": "Крона Л",
+      "tag": "L_CROWN",
+      "file": "patterns/crown_l.json",
+      "segments": 3,
+      "fills": 0
+    },
+    {
+      "id": "crown_r",
+      "name": "Крона П",
+      "tag": "R_CROWN",
+      "file": "patterns/crown_r.json",
+      "segments": 3,
+      "fills": 0
+    },
+    {
+      "id": "wing_r",
+      "name": "Крыло",
+      "tag": "КРЫЛО",
+      "file": "patterns/wing_r.json",
+      "segments": 13,
+      "fills": 0
+    },
+    {
+      "id": "chelovech",
+      "name": "Человечек",
+      "tag": "ЧЕЛОВЕЧЕК",
+      "file": "patterns/chelovech.json",
+      "segments": 23,
+      "fills": 0
+    },
+    {
+      "id": "chelovek",
+      "name": "Человек",
+      "tag": "ЧЕЛОВЕК",
+      "file": "patterns/chelovek.json",
+      "segments": 15,
+      "fills": 0
+    },
+    {
+      "id": "snezhinka1",
+      "name": "Кӗскӗ 1",
+      "tag": "КӖСКӖ_1",
+      "file": "patterns/snezhinka1.json",
+      "segments": 90,
+      "fills": 0
+    },
+    {
+      "id": "snezhinka2",
+      "name": "Кӗскӗ 2",
+      "tag": "КӖСКӖ_2",
+      "file": "patterns/snezhinka2.json",
+      "segments": 360,
+      "fills": 0
+    },
+    {
+      "id": "snezhinka3",
+      "name": "Кӗскӗ 3",
+      "tag": "КӖСКӖ_3",
+      "file": "patterns/snezhinka3.json",
+      "segments": 56,
+      "fills": 0
+    },
+    {
+      "id": "krab",
+      "name": "Жук",
+      "tag": "ЖУК",
+      "file": "patterns/krab.json",
+      "segments": 27,
+      "fills": 0
+    },
+    {
+      "id": "keske_iz_serdtsa",
+      "name": "Кеске из сердца",
+      "tag": "КЕСКЕ_ИЗ_СЕРДЦА",
+      "file": "patterns/keske_iz_serdtsa.json",
+      "segments": 56,
+      "fills": 0
+    },
+    {
+      "id": "zvezda",
+      "name": "Солнце",
+      "tag": "СОЛНЦЕ",
+      "file": "patterns/zvezda.json",
+      "segments": 16,
+      "fills": 0
+    },
+    {
+      "id": "serdtse",
+      "name": "Сердце",
+      "tag": "СЕРДЦЕ",
+      "file": "patterns/serdtse.json",
+      "segments": 12,
+      "fills": 0
+    },
+    {
+      "id": "bolshoe_serdtse",
+      "name": "Большое сердце",
+      "tag": "БОЛЬШОЕ_СЕРДЦЕ",
+      "file": "patterns/bolshoe_serdtse.json",
+      "segments": 14,
+      "fills": 0
+    },
+    {
+      "id": "vzaimoponimanie",
+      "name": "Взаимопонимание",
+      "tag": "ВЗАИМОПОНИМАНИЕ",
+      "file": "patterns/vzaimoponimanie.json",
+      "segments": 23,
+      "fills": 0
+    },
+    {
+      "id": "kuritsa",
+      "name": "Птица",
+      "tag": "ПТИЦА",
+      "file": "patterns/kuritsa.json",
+      "segments": 31,
+      "fills": 0
+    },
+    {
+      "id": "kuritsa_fill",
+      "name": "Птица заливка",
+      "tag": "ПТИЦА_ЗАЛИВКА",
+      "file": "patterns/kuritsa_fill.json",
+      "segments": 31,
+      "fills": 1
+    },
+    {
+      "id": "tsvetok",
+      "name": "Цветок",
+      "tag": "ЦВЕТОК",
+      "file": "patterns/tsvetok.json",
+      "segments": 14,
+      "fills": 0
+    },
+    {
+      "id": "tree",
+      "name": "Дерево",
+      "tag": "TREE",
+      "file": "patterns/tree.json",
+      "segments": 21,
+      "fills": 0
+    }
+  ]
+}

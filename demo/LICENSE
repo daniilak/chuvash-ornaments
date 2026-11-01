@@ -1,0 +1,13 @@
+The combined themed demonstration is distributed under the GNU General Public
+License version 2.0. Full text: vendor/hemingway/license.txt.
+
+Hemingway WordPress Theme, Copyright (c) 2014 Anders Norén, GPL-2.0.
+Its original unmodified CSS, copyright notice and license are retained in
+vendor/hemingway/.
+
+New playground application and integration code is also separately available
+under MIT, Copyright (c) 2026 daniilak. The root ../LICENSE contains its complete
+MIT permission and warranty notice, which must be retained.
+
+The independent npm library in ../src remains MIT; ornament coordinates CC0.
+The themed demo is excluded from the npm package.

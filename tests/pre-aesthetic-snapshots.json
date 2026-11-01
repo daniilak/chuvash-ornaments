@@ -1,0 +1,851 @@
+{
+  "compositions": {
+    "diamond-ribbon": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "diamond-ribbon",
+        "compositionVersion": 3
+      },
+      "sha256": "cee90d19da9c681fab3b9dc8ad94fd3be4150916b972d935982a2b4e082f30ec"
+    },
+    "stepped-frieze": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "stepped-frieze",
+        "compositionVersion": 3
+      },
+      "sha256": "13189edf1a4faf8293e0ca4fd8edbc452f366056e158c95a1369467164b790b7"
+    },
+    "paired-birds": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "paired-birds",
+        "compositionVersion": 3
+      },
+      "sha256": "74663732662af70db83e78a93ef9b0b54527844d8ad06c381f4bc0e791dd3440"
+    },
+    "keske-lace": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "keske-lace",
+        "compositionVersion": 3
+      },
+      "sha256": "819fa334eb44a3acb47712e6367e59c9b8149bf45b1b742cb56ae0950b871f50"
+    },
+    "sun-weave": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "sun-weave",
+        "compositionVersion": 3
+      },
+      "sha256": "a25a2748d7b6083d7eb18c0ef822135f9363d941a56f86205a101e204479e422"
+    },
+    "tree-procession": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "tree-procession",
+        "compositionVersion": 3
+      },
+      "sha256": "e4729b8b3de06f8fac53a839414c09679eb03989ab3134b37b7047257a839b18"
+    },
+    "hooked-meander": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "hooked-meander",
+        "compositionVersion": 3
+      },
+      "sha256": "423b8847edae0c5a07cd4451f0537ed6c82bd7de0c3b3d6bee1c61fa35e59ec6"
+    },
+    "hatched-diamonds": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "hatched-diamonds",
+        "compositionVersion": 3
+      },
+      "sha256": "23cf91ad2676087185ba5358ea059583c6b7ba0a421add01e41c2da8c85176ac"
+    },
+    "ceremonial-tree": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 220,
+        "size": 200,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "ceremonial-tree",
+        "compositionVersion": 3
+      },
+      "sha256": "1cb177118916287be3fd90ee79d05fdfb042697f95186ea9221212da182ee539"
+    },
+    "book-frame": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 400,
+        "size": 72,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "book-frame",
+        "compositionVersion": 3
+      },
+      "sha256": "3e8b4d89ab4f273877ea2816071e0ea45608c13b9cffd1d497cf15330f282f4b"
+    },
+    "comb-rosette": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 400,
+        "height": 400,
+        "size": 320,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "comb-rosette",
+        "compositionVersion": 3
+      },
+      "sha256": "3d6e8d83c2cac6f16dd41c12e0a279e006ffa7af0ac01dc04ba9b727c7fc19eb"
+    },
+    "hooked-rosette": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 400,
+        "height": 400,
+        "size": 320,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "hooked-rosette",
+        "compositionVersion": 3
+      },
+      "sha256": "91fe1742297aa82e2870356799912319910a9890a766194376d97763f438a3ea"
+    },
+    "lozenge-ligature": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "lozenge-ligature",
+        "compositionVersion": 3
+      },
+      "sha256": "0bd0755a83dadb49df81485eae742aeaf7d25b3886a273d410c15d261b03a4c2"
+    },
+    "toothed-diamonds": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "toothed-diamonds",
+        "compositionVersion": 3
+      },
+      "sha256": "ed676e31a88ec70dabd3f23b841d74a7f7d00999880061ff484c809f76d090f7"
+    },
+    "horn-band": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "horn-band",
+        "compositionVersion": 3
+      },
+      "sha256": "76e5b544afef0e9cf23e1ba851895b8b4acac91d54657bd02e4310dcdd133b93"
+    },
+    "comb-band": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 80,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "comb-band",
+        "compositionVersion": 3
+      },
+      "sha256": "ecd94a411c6000855afd0bd3d2c10f4804f7811e8f723770378a25d29a92f7c1"
+    },
+    "branch-medallion": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 400,
+        "height": 400,
+        "size": 320,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "branch-medallion",
+        "compositionVersion": 3
+      },
+      "sha256": "aba950792548ac6a8af21468a8131a0ce48628209047a264ab3d96cd33efcb48"
+    },
+    "lozenge-frame": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 400,
+        "size": 72,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "composition": "lozenge-frame",
+        "compositionVersion": 3
+      },
+      "sha256": "f2836858ab693a1ff00e0c699d1c270750e62767fdfb511cfd47519dd6676831"
+    },
+    "stitch-ribbon": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 88,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "#a64c38",
+        "title": "",
+        "composition": "stitch-ribbon",
+        "compositionVersion": 4
+      },
+      "sha256": "a8ec5ea5dbc1264e734c56064e94d8bd7a05c8a416cfe01d7e936821663b3e27"
+    },
+    "nested-chevrons": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 88,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "#292824",
+        "title": "",
+        "composition": "nested-chevrons",
+        "compositionVersion": 4,
+        "accentColor": "#c4a56d"
+      },
+      "sha256": "020d2a36a20427b26afbf55b24575d027400b621a45e80c3fd2b5506c15a29ed"
+    },
+    "stepped-scrolls": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 88,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "#292824",
+        "title": "",
+        "composition": "stepped-scrolls",
+        "compositionVersion": 4,
+        "accentColor": "#a64c38"
+      },
+      "sha256": "b03fb00e549f638e2564d206a73e32538d16000077ca4c11584ec6471c10dad5"
+    },
+    "diagonal-scrolls": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 88,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "#292824",
+        "title": "",
+        "composition": "diagonal-scrolls",
+        "compositionVersion": 4,
+        "accentColor": "#a64c38"
+      },
+      "sha256": "c9e8145cda25946b833a1b8e35452ad2f5352eec3002ade210c25b18c3a61c7b"
+    },
+    "forked-frieze": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 160,
+        "size": 88,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "#292824",
+        "title": "",
+        "composition": "forked-frieze",
+        "compositionVersion": 4,
+        "accentColor": "#a64c38"
+      },
+      "sha256": "8f63e99c4565ea6bd6d8ccd6dad1b3e226f19a63fc810b5956d1cd22b3d9f495"
+    },
+    "panel-headpiece": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "band",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 720,
+        "height": 220,
+        "size": 200,
+        "gap": 8,
+        "count": 128,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "#292824",
+        "title": "",
+        "composition": "panel-headpiece",
+        "compositionVersion": 4,
+        "accentColor": "#a64c38"
+      },
+      "sha256": "d19161a0f0cfcc8e003fac84f285ad21c84e35cf17e72f5809bb9e71c9d057f0"
+    }
+  },
+  "backgrounds": {
+    "lozenge-net": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "tile",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 160,
+        "height": 160,
+        "size": 64,
+        "gap": 8,
+        "count": 9,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "background": "lozenge-net",
+        "backgroundVersion": 1
+      },
+      "sha256": "39bc475d02c398f095334fa24fe3e3bd1b10fc8c1bfd96116db493083b4c0301"
+    },
+    "keske-field": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "tile",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 160,
+        "height": 160,
+        "size": 60,
+        "gap": 8,
+        "count": 9,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "background": "keske-field",
+        "backgroundVersion": 1
+      },
+      "sha256": "864b9d9fc7db998a59e445f9583b3929fd5bfeb21f4d1c778335119a5fbeb697"
+    },
+    "stepped-carpet": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "tile",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 160,
+        "height": 160,
+        "size": 136,
+        "gap": 8,
+        "count": 9,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "background": "stepped-carpet",
+        "backgroundVersion": 1
+      },
+      "sha256": "22fcc75937865623dda8c853c76378eaf1bdf062da8258aadc4ceee9ff1dced4"
+    },
+    "cross-stitch": {
+      "params": {
+        "schemaVersion": 1,
+        "preset": "tile",
+        "motif": "serdtse",
+        "motifs": [
+          "serdtse",
+          "bolshoe_serdtse",
+          "keske_iz_serdtsa"
+        ],
+        "seed": 42,
+        "width": 160,
+        "height": 160,
+        "size": 60,
+        "gap": 8,
+        "count": 9,
+        "strokeWidth": 0.36,
+        "fill": true,
+        "fillOpacity": 1,
+        "rotation": 0,
+        "reflect": "none",
+        "sequence": "seeded",
+        "layout": "grid",
+        "color": "currentColor",
+        "title": "",
+        "background": "cross-stitch",
+        "backgroundVersion": 1
+      },
+      "sha256": "9ee37d8cbbdc0e2c4a883cc41e14c57b76a9954e91332e7d9b91cdf4f2091c55"
+    }
+  }
+}

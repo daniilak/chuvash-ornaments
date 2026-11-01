@@ -1,0 +1,22 @@
+{
+  "retrieved": "2026-10-31",
+  "dataCommit": "72de7df08b1a19ca68781bceec69527d3bf5868a",
+  "files": {
+    "data/patterns.json": "385418b7e8e97beca752c1d0875dc1dbc66f6bd058ac01090fa26c78222b9d6d",
+    "sources/editor/pattern_shapes.js": "826cdd65383cdd8f07e5f2cebdf032a113ba687d3e11e0de44a1464be5b89bf6",
+    "sources/editor/pattern_geometry.js": "7798fb98d5ee71ae420bfe65c29f64842671457878a53dc36b81d3d6bbe5653f",
+    "sources/editor/pattern_editor.js": "b8ceb4cf8dfb145ea7c9b274122bbe4f56885e2107e12a1e05454b61961038d7"
+  },
+  "npmName": "@daniilak/chuvash-ornaments",
+  "npmRegistryStatus": 404,
+  "referenceTree": "ec6f48f574e8a1b43b184bfeddd0c4cea140c455",
+  "theme": {
+    "name": "Hemingway",
+    "version": "1",
+    "author": "Anders Norén",
+    "year": 2014,
+    "source": "https://themes.svn.wordpress.org/hemingway/1/",
+    "license": "GPL-2.0",
+    "cssSha256": "22208675ae483b07362fd3f8fb4d72e89627bb11e402102572352e4ca22c2d84"
+  }
+}

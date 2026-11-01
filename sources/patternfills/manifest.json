@@ -1,0 +1,25 @@
+{
+  "retrieved": "2026-11-01",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/iros/patternfills/master/LICENSE",
+      "file": "LICENSE",
+      "sha256": "8849f62165248bf0de30d6185f3c4acdbc7d91424ce1dedf1a20277e82f28623"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/iros/patternfills/master/src/patterns/6-other/houndstooth.svg",
+      "file": "houndstooth.svg",
+      "sha256": "f61c1f610d8e16bf2b415042730fc03f39942040571dfdb141690b5dad0e71c4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/iros/patternfills/master/src/patterns/6-other/crosshatch.svg",
+      "file": "crosshatch.svg",
+      "sha256": "25b9f2e96104cf8933edf5021a3a34e9d528da247bdf4250629865df72cec9b7"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/iros/patternfills/master/src/patterns/2-diagonal-stripe/diagonal-stripe-1.svg",
+      "file": "diagonal-stripe-1.svg",
+      "sha256": "08f98ef51f5830909743b6c5f9c4a677a84361195bd3e4b8a76d4cdd85704eea"
+    }
+  ]
+}

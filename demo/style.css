@@ -1,0 +1,168 @@
+/* MIT application styles over the unmodified, locally bundled Hemingway base. */
+:root{--ink:#24262a;--label:#383b40;--muted:#575c63;--line:#d5d8dd;--accent:#8b1a1a}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{background:#fff;color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-size:16px;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+button,select,input[type=range],input[type=color]{cursor:pointer}
+button{border:1px solid #b8bec6;border-radius:6px;background:#fff;padding:10px 15px;font-size:14px;font-weight:600;line-height:1.4;text-align:center}
+button:hover{background:#f3f4f6;border-color:#747b85}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+select,input[type=number]{display:block;min-width:0;width:100%;height:43px;padding:8px 11px;border:1px solid #b8bec6;border-radius:6px;background:#fff;font-size:16px;font-weight:500;line-height:1.4}
+.page.section-inner{width:1200px;max-width:calc(100% - 48px);margin:32px auto 64px;padding:0;border:0}
+.page-header{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:30px}
+.page-header h1{font-size:30px;font-weight:750;line-height:1.2;letter-spacing:-.5px}
+.language{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--label)}
+.language select{width:115px;font-size:14px;height:40px}
+.playground{display:grid;grid-template-columns:310px minmax(0,1fr);gap:36px;align-items:start}
+.controls-column,.result-column{min-width:0}
+.number-field>span{display:block;font-size:14px;font-weight:600;line-height:1.4;color:var(--label);margin-bottom:8px}
+.variation{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-bottom:24px}
+.variation button{height:43px;white-space:nowrap}
+.settings-section{padding:20px 0 2px;border-top:1px solid var(--line);margin-top:20px}
+.settings-section h2{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:16px}
+.dimensions{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:block;min-width:0;margin-bottom:19px;font-size:14px}
+.field>span{display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--label);font-weight:600;line-height:1.5;margin-bottom:9px}
+.field output{color:var(--ink);font-size:14px;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+.field output small{font-size:12px;font-weight:500;color:var(--muted)}
+input[type=range]{appearance:auto;width:100%;height:22px;margin:0;accent-color:#41464e}
+.color-field{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;font-size:14px;font-weight:600;color:var(--label)}
+.color-field>div{display:flex;align-items:center;gap:10px}
+input[type=color]{appearance:auto;width:42px;height:35px;padding:3px;border:1px solid #b8bec6;border-radius:5px;background:#fff}
+.color-field code{font:500 14px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--ink)}
+.checkbox{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:550;line-height:1.5;color:var(--label);margin-bottom:20px;cursor:pointer}
+input[type=checkbox]{appearance:auto;width:18px;height:18px;margin:0;accent-color:var(--accent)}
+.arrangement{display:grid;gap:0}
+.preview{display:flex;align-items:center;justify-content:center;min-height:230px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:24px 18px}
+.art-stage{position:relative;width:100%;max-height:460px}
+.art-svg,.art-svg svg{display:block;width:100%;height:100%}
+.tile-grid{width:min(100%,390px);background-repeat:repeat}
+.framed-copy{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:auto;text-align:center;padding:12px}
+.framed-copy h2{font-size:23px;font-weight:700;line-height:1.35;text-align:center;margin-bottom:13px}
+.framed-copy p{font-size:15px;font-weight:450;line-height:1.6;text-align:center}
+.actions{display:flex;align-items:center;gap:16px;margin:16px 0 28px;flex-wrap:wrap}
+.actions button{background:#30343a;color:#fff;border-color:#30343a}
+.actions button:hover{background:#4a5059}
+.actions [role=status]{font-size:14px;line-height:1.5;color:var(--muted)}
+.code-panel{min-width:0}
+.code-heading{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:13px}
+.code-heading h2{font-size:16px;font-weight:700;line-height:1.4}
+.code-heading button{font-size:13px;padding:8px 12px}
+.code-panel pre{white-space:pre;overflow-x:auto;margin:0;background:#f4f5f7;border:1px solid #dfe2e7;border-radius:7px;padding:20px;color:#30333a;font:500 13.5px/1.8 ui-monospace,Menlo,Monaco,Consolas,monospace;font-variant-ligatures:none}
+/* Compact, visually labelled ornament choices in the controls sidebar. */
+.pattern-picker{margin:0 0 20px}
+.category-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:12px}
+.category-picker button{min-width:0;padding:8px 2px;font-size:13px;line-height:1.4;border-radius:5px;color:var(--label);background:#f6f6f5;border-color:#d5d8dd}
+.category-picker button:hover{border-color:#888e97;background:#efefed}
+.category-picker button[aria-pressed=true]{background:#30343a;border-color:#30343a;color:#fff}
+.composition-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.composition-grid button{display:flex;align-items:center;justify-content:center;min-width:0;height:54px;padding:6px;border:1px solid #c5cad1;border-radius:5px;background:#fff}
+.composition-grid button:hover{background:#f6f6f5;border-color:#888e97}
+.composition-grid button[aria-pressed=true]{border:2px solid var(--accent);padding:5px;background:#faf5f4}
+.composition-grid .art-svg{width:100%;height:40px}
+.composition-grid svg{display:block;width:100%;height:40px;margin:0}
+.live-frame{border-top:1px solid var(--line);margin-top:30px;padding-top:20px}
+.live-frame>p{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:16px}
+.live-frame h2{font-size:22px;line-height:1.4;font-weight:700;margin-bottom:13px}
+.live-frame p{font-size:15px;line-height:1.6}
+@media(max-width:960px){.playground{grid-template-columns:280px minmax(0,1fr);gap:25px}.page.section-inner{max-width:calc(100% - 32px)}.language>span{display:none}.code-panel pre{padding:16px}}
+@media(max-width:680px){
+ .page.section-inner{margin-top:23px;max-width:calc(100% - 32px)}
+ .page-header{gap:14px;margin-bottom:25px;align-items:flex-start}
+ .page-header h1{font-size:24px;line-height:1.25}
+ .language select{width:99px;font-size:13px;height:38px}
+ .playground{display:flex;flex-direction:column;gap:0}
+ .controls-column,.result-column{display:contents}
+ .pattern-picker{order:0;width:100%;margin:0 0 18px}
+ .category-picker button{min-height:44px}
+ .composition-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .variation{order:1;width:100%;margin-bottom:24px}
+ .preview{order:3;width:100%;min-height:190px;padding:18px 12px}
+ .actions{order:4;width:100%;margin:16px 0 8px}
+ .settings-section{order:5;width:100%;margin-top:20px;padding-top:20px}
+ .settings-section h2{font-size:16px}
+ .code-panel{order:6;width:100%;margin-top:25px}
+ .code-panel pre{font-size:13px;padding:16px;line-height:1.8}
+ .live-frame{order:7;width:100%}
+ .framed-copy h2{font-size:18px}
+ .framed-copy p{font-size:14px}
+}
+.code-panel pre{font-size:14px}
+.code-panel pre code{display:block;font:inherit;white-space:inherit;color:inherit;background:transparent;padding:0;border:0}
+.color-field code{background:transparent;padding:0;border:0}
+/* Real typesetting examples: bands divide prose, headpieces open a chapter,
+   small tailpieces close it, and frames surround live selectable text. */
+.preview-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.preview-dimensions{font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.preview-mode{display:inline-flex;gap:3px;padding:4px;border:1px solid var(--line);border-radius:7px;background:#f4f5f7;margin:0}
+.preview-mode button{border-color:transparent;background:transparent;color:var(--muted);padding:7px 15px;font-size:14px;border-radius:4px}
+.preview-mode button[aria-pressed=true]{background:#fff;border-color:#b8bec6;color:var(--ink);box-shadow:0 1px 2px #00000008}
+.preview.in-context{display:block;min-height:0;padding:0;overflow:hidden;background:#fff}
+.context-paper{padding:clamp(28px,5vw,56px);color:#272321;font:400 21px/1.65 Georgia,'Times New Roman',serif;text-align:left}
+.context-paper h2{font:400 34px/1.2 Georgia,'Times New Roman',serif;letter-spacing:-.6px;color:#272321;text-align:left;margin:0 0 25px}
+.context-paper p{font:inherit;color:inherit;margin:0 0 22px;text-align:left}
+.context-paper>p:last-child{margin-bottom:0}
+.context-ornament svg{display:block;width:100%;height:auto}
+.context-band .context-ornament{margin:32px 0}
+.context-divider .context-ornament{width:82%;margin:32px auto}
+.context-headpiece .context-ornament{margin:0 0 25px}
+.context-paper .context-chapter{font:600 12px/1.5 system-ui,sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;color:#5a514b}
+.context-tailpiece .context-ornament{width:150px;max-width:35%;margin:35px auto 0}
+.context-frame.art-stage{position:relative;width:calc(100% - 36px);max-height:none;margin:18px;container-type:inline-size}
+.context-frame .context-ornament,.context-frame .context-ornament svg{width:100%;height:100%}
+.context-frame-copy.framed-copy{font:400 clamp(12px,3.9cqi,21px)/1.5 Georgia,'Times New Roman',serif;padding:8px;overflow:auto;color:#272321}
+.context-frame-copy.framed-copy h2{font:400 1.55em/1.2 Georgia,'Times New Roman',serif;letter-spacing:-.3px;color:inherit;margin-bottom:.7em}
+.context-frame-copy.framed-copy p{font:inherit;color:inherit;margin:0;text-align:center}
+.context-verse{white-space:pre-line}
+.context-background{padding:32px;background-repeat:repeat;background-color:#fff}
+.context-background .context-paper{padding:36px;background:#fff;border:1px solid #d5d8dd;box-shadow:0 2px 12px #24262a0a}
+@media(max-width:680px){
+ .preview-toolbar{order:2;width:100%}
+ .preview-mode button{font-size:14px;padding:7px 14px}
+ .context-paper{padding:27px 23px;font-size:18px;line-height:1.6}
+ .context-paper h2{font-size:28px;margin-bottom:21px;letter-spacing:-.4px}
+ .context-paper p{margin-bottom:20px}
+ .context-band .context-ornament{margin:25px 0}
+ .context-divider .context-ornament{margin:26px auto;width:90%}
+ .context-tailpiece .context-ornament{width:115px;max-width:40%;margin-top:28px}
+ .context-headpiece .context-ornament{margin-bottom:22px}
+ .context-frame.art-stage{width:calc(100% - 20px);margin:10px}
+ .context-frame-copy.framed-copy{padding:4px;line-height:1.45}
+ .context-frame-copy.framed-copy h2{margin-bottom:.45em}
+ .context-background{padding:20px}
+ .context-background .context-paper{padding:25px 20px}
+}
+.live-frame p{white-space:pre-line}
+/* A lightly grained sheet, separate from the white application surface. */
+:root{
+ --paper:#f4f3ef;
+ --paper-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .065'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Cpath d='M0 0H160V160H0Z' filter='url(%23grain)'/%3E%3C/svg%3E");
+ --paper-light:linear-gradient(115deg,#ffffff66,transparent 48%,#5d574008);
+}
+.preview.in-context{
+ background-color:var(--paper);
+ background-image:var(--paper-grain),var(--paper-light);
+ border-color:#ccc9c1;
+ border-radius:5px;
+ box-shadow:0 2px 3px #302b2108,0 12px 30px #302b2110,inset 0 1px 0 #ffffffa6;
+}
+.context-background{background-color:transparent}
+.context-background .context-paper{
+ background-color:var(--paper);
+ background-image:var(--paper-grain),var(--paper-light);
+ border-color:#ccc9c1;
+ box-shadow:0 2px 8px #302b2114;
+}
+/* Backgrounds are repeat fields, with an ample patterned cover around the label. */
+.background-specimen{width:100%;min-height:460px;background-repeat:repeat}
+.context-background{min-height:550px;padding:60px 54px;display:flex;align-items:center;justify-content:center}
+.context-background .context-paper{width:100%;max-width:400px;padding:40px 32px;text-align:center;font-size:20px;line-height:1.6}
+.context-background .context-paper h2{text-align:center;font-size:33px;margin-bottom:23px}
+.context-background .context-paper p{text-align:center}
+.context-background .context-paper p:last-child{font:600 12px/1.5 system-ui,sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin-top:30px}
+@media(max-width:680px){
+ .background-specimen{min-height:400px}
+ .context-background{min-height:430px;padding:52px 32px}
+ .context-background .context-paper{padding:30px 22px;font-size:18px}
+ .context-background .context-paper h2{font-size:28px}
+}

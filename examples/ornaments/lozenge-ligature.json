@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "preset": "band",
+  "motif": "serdtse",
+  "motifs": [
+    "serdtse",
+    "bolshoe_serdtse",
+    "keske_iz_serdtsa"
+  ],
+  "seed": 42,
+  "width": 960,
+  "height": 150,
+  "size": 90,
+  "gap": 8,
+  "count": 128,
+  "strokeWidth": 0.36,
+  "fill": true,
+  "fillOpacity": 1,
+  "rotation": 0,
+  "reflect": "none",
+  "sequence": "seeded",
+  "layout": "grid",
+  "color": "#8b1a1a",
+  "title": "",
+  "composition": "lozenge-ligature",
+  "compositionVersion": 3
+}

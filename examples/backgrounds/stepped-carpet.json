@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "preset": "tile",
+  "motif": "serdtse",
+  "motifs": [
+    "serdtse",
+    "bolshoe_serdtse",
+    "keske_iz_serdtsa"
+  ],
+  "seed": 42,
+  "width": 160,
+  "height": 160,
+  "size": 136,
+  "gap": 8,
+  "count": 9,
+  "strokeWidth": 0.36,
+  "fill": true,
+  "fillOpacity": 1,
+  "rotation": 0,
+  "reflect": "none",
+  "sequence": "seeded",
+  "layout": "grid",
+  "color": "#8b1a1a",
+  "title": "",
+  "background": "stepped-carpet",
+  "backgroundVersion": 1
+}

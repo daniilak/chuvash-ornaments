@@ -1,0 +1,200 @@
+[
+  {
+    "id": "diamond-ribbon",
+    "name": "Цепь ромбов",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "stepped-frieze",
+    "name": "Ступенчатая кайма",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "paired-birds",
+    "name": "Парные птицы",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "keske-lace",
+    "name": "Кайма с Кӗскӗ",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": false,
+    "fillOpacity": true
+  },
+  {
+    "id": "sun-weave",
+    "name": "Солнечное плетение",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "tree-procession",
+    "name": "Деревья и сердца",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "hooked-meander",
+    "name": "Крючковый меандр",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": false
+  },
+  {
+    "id": "hatched-diamonds",
+    "name": "Штрихованные ромбы",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "ceremonial-tree",
+    "name": "Дерево на линии",
+    "kind": "divider",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": false,
+    "fillOpacity": false
+  },
+  {
+    "id": "book-frame",
+    "name": "Книжная рамка",
+    "kind": "frame",
+    "seed": true,
+    "size": true,
+    "gap": false,
+    "count": false,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "comb-rosette",
+    "name": "Гребенчатая розетка",
+    "kind": "rosette",
+    "seed": false,
+    "size": true,
+    "gap": false,
+    "count": false,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "hooked-rosette",
+    "name": "Розетка с крючками",
+    "kind": "rosette",
+    "seed": false,
+    "size": true,
+    "gap": false,
+    "count": false,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "lozenge-ligature",
+    "name": "Ромбовая вязь",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "toothed-diamonds",
+    "name": "Зубчатые ромбы",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "horn-band",
+    "name": "Рогатая кайма",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "comb-band",
+    "name": "Гребенчатая полоса",
+    "kind": "band",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": true,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "branch-medallion",
+    "name": "Ветвистый медальон",
+    "kind": "rosette",
+    "seed": false,
+    "size": true,
+    "gap": false,
+    "count": false,
+    "fill": true,
+    "fillOpacity": true
+  },
+  {
+    "id": "lozenge-frame",
+    "name": "Ромбовая рамка",
+    "kind": "frame",
+    "seed": true,
+    "size": true,
+    "gap": true,
+    "count": false,
+    "fill": true,
+    "fillOpacity": true
+  }
+]
