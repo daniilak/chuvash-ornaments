@@ -189,7 +189,10 @@ export const chuvashDesignNames:Record<string,string>={
   "deer-guardians": "Йывӑҫ патӗнчи пӑлансем",
   "deer-crest": "Пӑлан палли",
   "deer-sun-divider": "Пӑлан уйӑрӑвӗ",
-  "deer-tapestry-frame": "Пӑлан рамки"
+  "deer-tapestry-frame": "Пӑлан рамки",
+  "wedding-cloth-frame": "Туй рамки",
+  "masmak-tiered-band": "Масмак",
+  "sara-paired-tailpiece": "Сарӑ"
 };
 export const chuvashBackgrounds:Record<string,string>={
   "lozenge-net": "Ромблӑ сетка",

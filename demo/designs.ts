@@ -41,7 +41,10 @@ export function sizeLimit(design:string,p:Pick<Params,'width'|'height'|'gap'|'la
  const W=p.width,H=p.height;
  let maximum:number;
  const background=BACKGROUNDS.find(b=>b.id===design);
- if(design==='winged-headpiece')maximum=52*Math.min(W*.9/148,H*.8/52);
+ if(design==='wedding-cloth-frame')maximum=Math.min(W,H)*.16;
+ else if(design==='masmak-tiered-band')maximum=Math.min(H*.86,W*1.5);
+ else if(design==='sara-paired-tailpiece')maximum=680*Math.min(W*.94/1100,H*.9/680);
+ else if(design==='winged-headpiece')maximum=52*Math.min(W*.9/148,H*.8/52);
  else if(design==='deer-guardians'||design==='deer-crest')maximum=132*Math.min(W*.92/360,H*.82/132);
  else if(design==='deer-sun-divider')maximum=104*Math.min(W*.92/288,H*.8/104);
  else if(['sovereign-headpiece','procession-headpiece','heart-canopy-headpiece'].includes(design))maximum=88*Math.min(W*.92/264,H*.82/88);

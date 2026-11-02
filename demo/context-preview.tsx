@@ -4,13 +4,13 @@ import type { Language } from './i18n';
 import { svgUrl } from './svg-url';
 
 export type ContextKind='band'|'headpiece'|'tailpiece'|'divider'|'frame'|'background';
-export function contextKind(design:string,kind?:'band'|'divider'|'separator'|'rosette'|'frame'|'background'):ContextKind{
+export function contextKind(design:string,kind?:'band'|'divider'|'separator'|'rosette'|'frame'|'tailpiece'|'background'):ContextKind{
  if(design==='tile'||kind==='background')return'background';
  if(design==='border'||design==='corners'||kind==='frame')return'frame';
  if(kind==='divider')return'headpiece';
  if(kind==='separator')return'divider';
  if(design==='divider')return'divider';
- if(design==='motif'||kind==='rosette')return'tailpiece';
+ if(design==='motif'||kind==='rosette'||kind==='tailpiece')return'tailpiece';
  return'band';
 }
 type Story={title:string;lead:string;body:string;chapter?:string};

@@ -10,14 +10,14 @@ import{svgUrl}from'./svg-url';
 import{saveBlob,svgToPng}from'./download';
 import'./vendor/hemingway/style.css';
 import'./style.css';
-const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(49),...COMPOSITIONS.slice(40,49),...COMPOSITIONS.slice(24,40),...COMPOSITIONS.slice(18,24),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
+const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(55),...COMPOSITIONS.slice(49,55),...COMPOSITIONS.slice(40,49),...COMPOSITIONS.slice(24,40),...COMPOSITIONS.slice(18,24),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
 const categories=['frame','band','headpiece','tailpiece','divider','background'] as const;
 function thumbnail(id:string,seed:number,color:string){
  const c=COMPOSITIONS.find(c=>c.id===id),background=BACKGROUNDS.find(b=>b.id===id);
  const book=BOOK_STUDIES.find(b=>b.id===id);
  const style={seed,color:book?.twoTone?'#292824':color,strokeWidth:.36,fillOpacity:1};
  if(background)return generateBackground({...style,strokeWidth:.6,background:background.id}).svg;
- if(c)return generateComposition({...style,strokeWidth:c.kind==='rosette'?.36:['keske-lace','tree-procession','stitch-ribbon','hatched-diamonds','comb-band','ceremonial-tree'].includes(c.id)?.6:.42,composition:c.id,width:c.kind==='rosette'?240:c.kind==='frame'?400:c.id==='stitch-ribbon'?300:c.kind==='band'?400:640,height:c.kind==='rosette'?240:c.kind==='frame'?250:c.kind==='divider'?180:150,size:c.kind==='rosette'?210:c.kind==='frame'?36:c.kind==='divider'?200:76}).svg;
+ if(c)return generateComposition({...style,strokeWidth:c.kind==='rosette'?.36:['keske-lace','tree-procession','stitch-ribbon','hatched-diamonds','comb-band','ceremonial-tree'].includes(c.id)?.6:.42,composition:c.id,width:c.kind==='rosette'?240:c.kind==='frame'?400:c.id==='stitch-ribbon'?300:c.kind==='band'?400:640,height:c.kind==='rosette'?240:c.kind==='frame'?250:c.kind==='divider'?180:c.kind==='tailpiece'?360:150,size:c.kind==='rosette'?210:c.kind==='frame'?36:c.kind==='divider'||c.kind==='tailpiece'?200:76}).svg;
  style.strokeWidth=.8;
  const motif='serdtse';
  if(id==='motif')return generateMotif({...style,motif,width:160,height:160}).svg;
@@ -63,7 +63,7 @@ function App(){
   const book=BOOK_STUDIES.find(b=>b.id===id),elite=ELITE_STUDIES.find(b=>b.id===id);
   const kind=COMPOSITIONS.find(c=>c.id===id)?.kind,bg=BACKGROUNDS.find(b=>b.id===id);
   if(bg||id==='tile')setBackgroundScale(75);
-  const defaults={...(book&&['nested-chevrons','forked-frieze'].includes(id)?{gap:0}:{gap:12}),width:bg?160:kind==='rosette'?400:id==='tile'?160:720,height:bg?160:kind==='rosette'?400:kind==='frame'?400:kind==='divider'?220:kind==='separator'?120:id==='tile'?160:id==='motif'?300:id==='border'||id==='corners'?400:160,size:elite?elite.size:book?book.size:bg?bg.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:id==='tile'?52:id==='border'||id==='corners'?36:80};
+  const defaults={...(book&&['nested-chevrons','forked-frieze'].includes(id)?{gap:0}:{gap:12}),width:bg?160:kind==='rosette'?400:id==='tile'?160:720,height:bg?160:kind==='rosette'?400:kind==='frame'?400:kind==='tailpiece'?440:kind==='divider'?220:kind==='separator'?120:id==='tile'?160:id==='motif'?300:id==='border'||id==='corners'?400:160,size:elite?elite.size:book?book.size:bg?bg.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:id==='tile'?52:id==='border'||id==='corners'?36:80};
   setDesign(id);setParams(old=>fitUiParams(id,old,{...defaults,...(elite?{color:'#762b32',accentColor:'#aa8247'}:{}),...(book?{color:book.twoTone?'#292824':'#a64c38',accentColor:book.id==='nested-chevrons'?'#c4a56d':'#a64c38'}:{}),...(id==='tile'?{layout:'checkerboard' as const,sequence:'mirror' as const}:{}),count:128,fill:true,fillOpacity:1}));setNotice('');
  }
  const sizeName=design==='corners'?t.cornerSize:frame?t.frameSize:rosette?t.figureSize:design==='ceremonial-tree'?t.treeSize:t.size;
@@ -115,7 +115,7 @@ function App(){
      {twoTone&&<label className="color-field"><span>{t.accentColor}</span><div><input aria-label={t.accentColor} type="color" value={secondInk} onChange={e=>update({accentColor:e.target.value})}/><code>{secondInk}</code></div></label>}
      {tile&&<label className="field"><span>{t.backgroundScale}<output>{backgroundScale}<small> %</small></output></span><input aria-label={t.backgroundScale} type="range" min="40" max="160" step="5" value={backgroundScale} onChange={e=>setBackgroundScale(Number(e.target.value))}/></label>}
      {!motif&&slider(sizeName,'size',8,sizeLimit(design,q),1,'px')}
-     {!motif&&!rosette&&!backgroundRecipe&&recipe?.kind!=='divider'&&recipe?.kind!=='separator'&&slider(t.gap,'gap',0,tile?Math.min(48,Math.max(0,Math.min(q.width,q.height)/(q.layout==='checkerboard'?2:1)-8)):48,1,'px')}
+     {!motif&&!rosette&&!backgroundRecipe&&recipe?.kind!=='divider'&&recipe?.kind!=='separator'&&recipe?.kind!=='tailpiece'&&slider(t.gap,'gap',0,tile?Math.min(48,Math.max(0,Math.min(q.width,q.height)/(q.layout==='checkerboard'?2:1)-8)):48,1,'px')}
      {(!rosette||!q.fill||!!elite)&&!(book?.id==='stitch-ribbon'&&q.fill)&&!(backgroundRecipe?.id==='stepped-carpet'&&q.fill)&&slider(t.stroke,'strokeWidth',.04,.8,.02)}
      {(fillMode==='outline'||fillMode==='hatch')&&<label className="checkbox"><input aria-label={fillMode==='hatch'?t.hatch:t.outline} type="checkbox" checked={fillMode==='hatch'?q.fill:!q.fill} onChange={e=>update({fill:fillMode==='hatch'?e.target.checked:!e.target.checked})}/><span>{fillMode==='hatch'?t.hatch:t.outline}</span></label>}
      {opacity&&slider(t.opacity,'fillOpacity',0,1,.01,'%')}

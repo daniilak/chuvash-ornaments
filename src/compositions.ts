@@ -27,7 +27,7 @@ export interface CompositionResult extends Generated {
   /** Safe content margins for frame recipes. */
   inset?: FrameResult['inset'];
 }
-export type CompositionKind = 'band' | 'divider' | 'separator' | 'rosette' | 'frame';
+export type CompositionKind = 'band' | 'divider' | 'separator' | 'rosette' | 'frame' | 'tailpiece';
 export const COMPOSITIONS = Object.freeze(([
   { id: 'diamond-ribbon', kind: 'band', name: Object.freeze({ ru: 'Цепь ромбов', en: 'Diamond ribbon' }) },
   { id: 'stepped-frieze', kind: 'band', name: Object.freeze({ ru: 'Ступенчатая кайма', en: 'Stepped frieze' }) },
@@ -64,7 +64,7 @@ export function generateComposition(input: ParamsInput & { composition?: Composi
   const composition = COMPOSITIONS.some(c => c.id === input.composition) ? input.composition! : 'diamond-ribbon';
   const kind=COMPOSITIONS.find(c=>c.id===composition)!.kind;
   const version=input.compositionVersion??refinedVersion(composition);
-  const p: CompositionParams = { ...normalizeParams({ width: kind==='rosette'?400:720, height: kind==='rosette'?400:kind==='frame'?400:kind==='divider'?220:kind==='separator'?120:160, size: elite?elite.size:book?book.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:80, count: 128, strokeWidth: 0.36, fillOpacity: 1, ...(book?{color:book.twoTone?'#292824':'#a64c38'}:{}), ...(elite?{color:ELITE_COLOR}:{}), ...(version===5&&['nested-chevrons','forked-frieze'].includes(composition)?{gap:0}:{}), ...input, preset: 'band' }), composition, compositionVersion: version, ...(elite||book?.twoTone?{accentColor:normalizeParams({color:input.accentColor??(elite?ELITE_ACCENT:book?.id==='nested-chevrons'?'#c4a56d':'#a64c38')}).color}:{}) };
+  const p: CompositionParams = { ...normalizeParams({ width: kind==='rosette'?400:720, height: kind==='rosette'?400:kind==='frame'?400:kind==='tailpiece'?440:kind==='divider'?220:kind==='separator'?120:160, size: elite?elite.size:book?book.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:80, count: 128, strokeWidth: 0.36, fillOpacity: 1, ...(book?{color:book.twoTone?'#292824':'#a64c38'}:{}), ...(elite?{color:ELITE_COLOR}:{}), ...(version===5&&['nested-chevrons','forked-frieze'].includes(composition)?{gap:0}:{}), ...input, preset: 'band' }), composition, compositionVersion: version, ...(elite||book?.twoTone?{accentColor:normalizeParams({color:input.accentColor??(elite?ELITE_ACCENT:book?.id==='nested-chevrons'?'#c4a56d':'#a64c38')}).color}:{}) };
   const d = new Drawing(p), studies: StudyPlacement[] = [];
   let inset: FrameResult['inset']|undefined;
   const result = (): CompositionResult => ({ ...d.result(), params: p, studies, ...(inset?{inset}:{}) });

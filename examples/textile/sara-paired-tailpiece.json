@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "preset": "band",
+  "motif": "serdtse",
+  "motifs": [
+    "serdtse",
+    "bolshoe_serdtse",
+    "keske_iz_serdtsa"
+  ],
+  "seed": 1,
+  "width": 1100,
+  "height": 680,
+  "size": 600,
+  "gap": 8,
+  "count": 128,
+  "strokeWidth": 0.36,
+  "fill": true,
+  "fillOpacity": 1,
+  "rotation": 0,
+  "reflect": "none",
+  "sequence": "seeded",
+  "layout": "grid",
+  "color": "#762b32",
+  "title": "",
+  "composition": "sara-paired-tailpiece",
+  "compositionVersion": 3,
+  "accentColor": "#aa8247"
+}

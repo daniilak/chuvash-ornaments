@@ -4,7 +4,7 @@ import {Resvg} from '@resvg/resvg-js';
 import {ELITE_STUDIES,generateComposition} from '../dist/index.js';
 
 test('ceremonial collection saves both inks, validates colors and rejects unsupported versions',()=>{
-  assert.equal(ELITE_STUDIES.length,31);
+  assert.equal(ELITE_STUDIES.length,34);
   for(const {id:composition}of ELITE_STUDIES){
     const art=generateComposition({composition,color:'#762b32',accentColor:'#aa8247'});
     assert.equal(art.svg,generateComposition(JSON.parse(JSON.stringify(art.params))).svg);
