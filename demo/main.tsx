@@ -3,7 +3,7 @@ import{createRoot}from'react-dom/client';
 import{MOTIFS,BOOK_STUDIES,COMPOSITIONS,BACKGROUNDS,generateBackground,generateMotif,generateOrnament,generateTile,fitFrame,generateComposition,getMotif}from'@daniilak/chuvash-ornaments';
 import{Framed}from'@daniilak/chuvash-ornaments/react';
 import type{ParamsInput,Preset,Sequence,MotifId,FrameResult,CompositionKind}from'@daniilak/chuvash-ornaments';
-import{text,englishMotifs,resolveLanguage,type Preference}from'./i18n';
+import{text,englishMotifs,chuvashMotifs,chuvashBackgrounds,resolveLanguage,type Preference}from'./i18n';
 import{designInfo,backgroundInfo,designCopy,sizeLimit,fitUiParams}from'./designs';
 import{ContextPreview,contextKind}from'./context-preview';
 import{svgUrl}from'./svg-url';
@@ -25,7 +25,7 @@ function thumbnail(id:string,seed:number,color:string){
  return generateOrnament({...style,motif,preset:id as Preset,width:640,height:150,size:76,gap:12,count:7,sequence:'mirror'}).svg;
 }
 const storageKey='chuvash-ornaments.language';
-function preference():Preference{try{const p=localStorage.getItem(storageKey);if(p==='ru'||p==='en')return p;}catch{}return'system';}
+function preference():Preference{try{const p=localStorage.getItem(storageKey);if(p==='ru'||p==='en'||p==='cv')return p;}catch{}return'system';}
 function SVG({svg,...props}:{svg:string}&React.HTMLAttributes<HTMLDivElement>){return<div {...props} dangerouslySetInnerHTML={{__html:svg}}/>;}
 function NumberField({label,value,min,max,onChange}:{label:string;value:number;min:number;max:number;onChange:(value:number)=>void}){
  const[draft,setDraft]=useState(String(value));
@@ -52,7 +52,7 @@ function App(){
  const q=result.params;
  const category=contextKind(design,backgroundRecipe?'background':recipe?.kind);
  const visibleChoices=choices.filter(c=>contextKind(c.id,c.kind)===category);
- const choiceName=(id:string)=>{const c=COMPOSITIONS.find(c=>c.id===id);const b=BACKGROUNDS.find(b=>b.id===id);return c?designCopy(c.id,lang).name:b?b.name[lang]:t[id as 'motif'];};
+ const choiceName=(id:string)=>{const c=COMPOSITIONS.find(c=>c.id===id);const b=BACKGROUNDS.find(b=>b.id===id);return c?designCopy(c.id,lang).name:b?(lang==='cv'?chuvashBackgrounds[b.id]:b.name[lang]):t[id as 'motif'];};
  const showVariation=!motif&&!rosette&&(!!recipe||!!backgroundRecipe||q.sequence==='seeded');
  const update=(patch:ParamsInput & {accentColor?:string})=>{setParams(old=>fitUiParams(design,old,patch));setNotice('');};
  function selectDesign(id:string){
@@ -90,7 +90,7 @@ function App(){
  }
  const inset='inset'in result?result.inset as FrameResult['inset']|undefined:undefined;
  return<main className="page section-inner">
-  <header className="page-header"><h1>{t.title}</h1><label className="language"><span>{t.language}</span><select aria-label={t.language} value={pref} onChange={e=>language(e.target.value as Preference)}><option value="system">{t.system}</option><option value="ru">Русский</option><option value="en">English</option></select></label></header>
+  <header className="page-header"><h1>{t.title}</h1><label className="language"><span>{t.language}</span><select aria-label={t.language} value={pref} onChange={e=>language(e.target.value as Preference)}><option value="system">{t.system}</option><option value="ru">Русский</option><option value="en">English</option><option value="cv">Чӑвашла</option></select></label></header>
   <section className="playground" id="playground">
    <aside className="controls-column">
     <section className="pattern-picker" aria-label={t.choose}>
@@ -100,7 +100,7 @@ function App(){
     {showVariation&&<div className="variation"><NumberField label={t.seed} min={0} max={4294967295} value={q.seed} onChange={seed=>update({seed})}/><button title={t.newVariant} aria-label={t.newVariant} onClick={()=>update({seed:(q.seed+1)>>>0})}>↻ {t.another}</button></div>}
     <section className="settings-section"><h2>{tile?t.tileSize:t.format}</h2><div className="dimensions"><NumberField label={t.width} value={q.width} min={48} max={2400} onChange={width=>update({width})}/><NumberField label={t.height} value={q.height} min={48} max={1600} onChange={height=>update({height})}/></div></section>
     <section className="settings-section"><h2>{t.appearance}</h2>
-     {!recipe&&!backgroundRecipe&&<label className="field motif-select"><span>{t.sourceMotif}</span><select aria-label={t.sourceMotif} value={q.motif} onChange={e=>update({motif:e.target.value as MotifId,motifs:undefined})}>{MOTIFS.map(m=><option key={m.id} value={m.id} title={m.name}>{lang==='ru'?m.name:englishMotifs[m.id]}</option>)}</select></label>}
+     {!recipe&&!backgroundRecipe&&<label className="field motif-select"><span>{t.sourceMotif}</span><select aria-label={t.sourceMotif} value={q.motif} onChange={e=>update({motif:e.target.value as MotifId,motifs:undefined})}>{MOTIFS.map(m=><option key={m.id} value={m.id}>{lang==='ru'?m.name:lang==='cv'?chuvashMotifs[m.id]:englishMotifs[m.id]}</option>)}</select></label>}
      <label className="color-field"><span>{t.color}</span><div><input aria-label={t.color} type="color" value={q.color} onChange={e=>update({color:e.target.value})}/><code>{q.color}</code></div></label>
      {book?.twoTone&&<label className="color-field"><span>{t.accentColor}</span><div><input aria-label={t.accentColor} type="color" value={params.accentColor??'#a64c38'} onChange={e=>update({accentColor:e.target.value})}/><code>{params.accentColor??'#a64c38'}</code></div></label>}
      {tile&&<label className="field"><span>{t.backgroundScale}<output>{backgroundScale}<small> %</small></output></span><input aria-label={t.backgroundScale} type="range" min="40" max="160" step="5" value={backgroundScale} onChange={e=>setBackgroundScale(Number(e.target.value))}/></label>}

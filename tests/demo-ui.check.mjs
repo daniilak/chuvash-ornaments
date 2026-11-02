@@ -199,3 +199,39 @@ test('new book studies expose a second ink only where it applies and export comp
   assert.deepEqual(errors,[]);
  }finally{dom.window.close();}
 });
+
+test('Chuvash works automatically, persists manual choice and localizes every category and book example',async()=>{
+ const auto=await load(['cv-RU','ru-RU']);
+ assert.equal(auto.doc.documentElement.lang,'cv');
+ assert.equal(auto.doc.querySelector('h1').textContent,'Чӑваш тӗррисем');
+ auto.dom.window.close();
+ const{dom,doc,errors}=await load(['ru-RU']);
+ try{
+  const select=doc.querySelector('.language select');
+  assert.equal(select.querySelector('option[value=cv]').textContent,'Чӑвашла');
+  change(dom,select,'cv');await waitFor(()=>doc.documentElement.lang==='cv');
+  assert.equal(doc.title,'Чӑваш тӗррисем');
+  assert.equal(dom.window.localStorage.getItem('chuvash-ornaments.language'),'cv');
+  assert.equal(doc.querySelector('.code-heading h2').textContent,'Код');
+  assert(doc.querySelector('button').textContent.includes('Рамкӑсем'));
+  const seen=new Set();
+  for(const id of Object.values(groups).flat()){
+   await choose(dom,doc,id);seen.add(id);
+   for(const b of doc.querySelectorAll('.composition-grid button')){
+    assert(b.getAttribute('aria-label')?.trim(),id);assert.equal(b.textContent.trim(),'');
+   }
+   const context=doc.querySelector('[data-context]');assert(context,id);
+   assert(/[ӑӗҫӳ]/.test(context.textContent),id);
+   assert(!doc.body.textContent.includes('undefined'),id);
+  }
+  assert.equal(seen.size,35);
+  await choose(dom,doc,'motif');
+  const motif=doc.querySelector('.motif-select select');assert.equal(motif.options.length,16);
+  assert(motif.textContent.includes('Чӗре'));assert(motif.textContent.includes('Йывӑҫ'));
+  change(dom,select,'system');await waitFor(()=>doc.documentElement.lang==='ru');
+  assert.equal(dom.window.localStorage.getItem('chuvash-ornaments.language'),null);
+  assert.deepEqual(errors,[]);
+ }finally{dom.window.close();}
+ const restored=await load(['en-US'],'cv');
+ assert.equal(restored.doc.documentElement.lang,'cv');restored.dom.window.close();
+});

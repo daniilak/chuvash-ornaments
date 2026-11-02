@@ -88,10 +88,11 @@ React entry point adds Composition. These recipes restore through
 The demo has no navigation or ambiguous tabs. Miniature recipes and settings
 sit at left; a white specimen and visible code sit at right. The original
 motif gallery was removed from the page. Basic layouts retain motif selection.
-`demo/i18n.ts` supplies matching English/Russian dictionaries and a pure
+`demo/i18n.ts` supplies matching English/Russian/Chuvash dictionaries and a pure
 supported-language resolver. A system/manual selector follows navigator.languages
-by default and saves only manual overrides in localStorage. Source names
-remain visible alongside English motif labels. No network data is required.
+by default and saves only manual overrides in localStorage. The cv and cv-RU system locales select Chuvash. Localized accessible names
+cover all 24 compositions, five backgrounds and sixteen source motifs; six
+book-context examples also have Chuvash text. Original catalog IDs/names stay intact. No network data is required.
 
 
 `book-recipes.ts` adds an exact quarter-turn local frame for the second book

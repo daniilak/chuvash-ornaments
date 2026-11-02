@@ -1,5 +1,5 @@
 import { BOOK_STUDIES, BACKGROUNDS, type BackgroundId, type CompositionId, type Params, type ParamsInput } from '@daniilak/chuvash-ornaments';
-import type { Language } from './i18n';
+import {chuvashDesignNames,type Language} from './i18n';
 type Copy = {name:string};
 export interface DesignInfo {
   ru:Copy;en:Copy;
@@ -33,7 +33,7 @@ export const backgroundInfo:Record<BackgroundId,Pick<DesignInfo,'fill'|'opacity'
  'lozenge-net':{fill:'none',opacity:false},'keske-field':{fill:'none',opacity:false},
  'stepped-carpet':{fill:'outline',opacity:true},'cross-stitch':{fill:'hatch',opacity:false},
 };
-export const designCopy=(id:CompositionId,lang:Language)=>designInfo[id][lang];
+export const designCopy=(id:CompositionId,lang:Language)=>lang==='cv'?{name:chuvashDesignNames[id]}:designInfo[id][lang];
 
 /** Limits mirror the actual renderer, so sliders do not extend into ranges with no effect. */
 export function sizeLimit(design:string,p:Pick<Params,'width'|'height'|'gap'|'layout'>):number{

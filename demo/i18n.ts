@@ -1,11 +1,89 @@
-export type Language = 'ru' | 'en';
+export type Language = 'ru' | 'en' | 'cv';
 export type Preference = Language | 'system';
 export function resolveLanguage(preference:unknown,languages:readonly string[]):Language{
- if(preference==='ru'||preference==='en')return preference;
- for(const language of languages){if(/^ru(?:-|$)/i.test(language))return 'ru';if(/^en(?:-|$)/i.test(language))return 'en';}
+ if(preference==='ru'||preference==='en'||preference==='cv')return preference;
+ for(const language of languages){
+  const primary=language.toLowerCase().split(/[-_]/)[0];
+  if(primary==='cv'||primary==='chv')return 'cv';
+  if(primary==='ru'||primary==='en')return primary;
+ }
  return 'en';
 }
 export const text={
+ cv:{
+  "title": "Чӑваш тӗррисем",
+  "description": "SVG тӗрӗсем, фигурӑсем тата рамкӑсем.",
+  "language": "Чӗлхе",
+  "system": "Хӑй тӗллӗн",
+  "design": "Тӗрӗ",
+  "newDesigns": "Хатӗр тӗрӗсем",
+  "basic": "Ансат формӑсем",
+  "category": "Тӗрӗ тӗсӗ",
+  "categories": {
+    "frame": "Рамкӑсем",
+    "band": "Йӗрсем",
+    "headpiece": "Пуҫлам",
+    "tailpiece": "Вӗҫлев",
+    "divider": "Уйӑрусем",
+    "background": "Фонсем"
+  },
+  "motif": "Пӗр фигура",
+  "divider": "Уйӑру",
+  "band": "Йӗр",
+  "tile": "Фон",
+  "border": "Рамкӑ",
+  "corners": "Кӗтессем",
+  "sourceMotif": "Фигура",
+  "seed": "Вариант",
+  "newVariant": "Тепӗр вариант",
+  "another": "Тепри",
+  "color": "Тӗс",
+  "accentColor": "Иккӗмӗш тӗс",
+  "width": "Сарлакӑш",
+  "height": "Ҫӳллӗш",
+  "stroke": "Йӗр хулӑнӑшӗ",
+  "size": "Фигурӑсен виҫи",
+  "figureSize": "Фигура виҫи",
+  "treeSize": "Йывӑҫ виҫи",
+  "frameSize": "Рамкӑ хулӑнӑшӗ",
+  "cornerSize": "Кӗтессен виҫи",
+  "gap": "Хушӑк",
+  "sequence": "Тӗрӗ йӗрки",
+  "repeat": "Пӗр пек",
+  "alternate": "Ылмаштарса",
+  "mirror": "Тӗкӗр пек",
+  "seeded": "Вариант тӑрӑх",
+  "layout": "Вырнаҫтарни",
+  "grid": "Йӗркепе",
+  "checkerboard": "Шахмат пек",
+  "rotation": "Ҫавӑрни",
+  "reflect": "Тӗкӗрлени",
+  "none": "Ҫук",
+  "horizontal": "Выртмалла",
+  "vertical": "Тӑратмалла",
+  "both": "Икӗ еннелле",
+  "outline": "Контур ҫеҫ",
+  "hatch": "Штрихсем",
+  "opacity": "Тултару шайӗ",
+  "download": "SVG уҫласа ил",
+  "copy": "Копи ту",
+  "copied": "Копи тунӑ",
+  "copyFail": "Кода палӑртӑр та копи тӑвӑр",
+  "downloaded": "SVG уҫласа илнӗ",
+  "code": "Код",
+  "choose": "Пур тӗрӗсем",
+  "previewMode": "Умкурӑм",
+  "inContext": "Текстра",
+  "specimen": "Тӗслӗх",
+  "tileSize": "Плиткӑ виҫи",
+  "backgroundScale": "Фон масштабӗ",
+  "format": "Файл виҫи",
+  "appearance": "Ӳкерчӗк",
+  "placement": "Вырнаҫтарни",
+  "cardTitle": "Шыв хӗрринче",
+  "cardText": "Шыв хӗрринче йывӑҫсем ӳсеҫҫӗ.\nКаҫхи хӗвел ҫути шывра вылять.\nТӑван ҫӗршыв чӗрене савӑнтарать.",
+  "resize": "Виҫине улӑштарма сылтӑм аялти кӗтесрен туртӑр."
+},
  ru:{
   title:'Чувашские узоры',description:'SVG-узоры, фигуры и рамки.',language:'Язык',system:'Авто',design:'Узор',newDesigns:'Готовые узоры',basic:'Простые формы',
   category:'Тип узора',categories:{frame:'Рамки',band:'Полосы',headpiece:'Заставки',tailpiece:'Концовки',divider:'Разделители',background:'Фоны'},
@@ -34,3 +112,55 @@ export const text={
  },
 } as const;
 export const englishMotifs:Record<string,string>={wing_r:'Wing',chelovech:'Little person',chelovek:'Person',snezhinka1:'Kĕskĕ 1',snezhinka2:'Kĕskĕ 2',snezhinka3:'Kĕskĕ 3',krab:'Beetle',keske_iz_serdtsa:'Heart Kĕskĕ',zvezda:'Sun',serdtse:'Heart',bolshoe_serdtse:'Large heart',vzaimoponimanie:'Mutual understanding',kuritsa:'Bird',kuritsa_fill:'Filled bird',tsvetok:'Flower',tree:'Tree'};
+
+export const chuvashMotifs:Record<string,string>={
+  "wing_r": "Ҫунат",
+  "chelovech": "Пӗчӗк ҫын",
+  "chelovek": "Ҫын",
+  "snezhinka1": "Кӗскӗ 1",
+  "snezhinka2": "Кӗскӗ 2",
+  "snezhinka3": "Кӗскӗ 3",
+  "krab": "Хурт",
+  "keske_iz_serdtsa": "Чӗререн тунӑ кӗскӗ",
+  "zvezda": "Хӗвел",
+  "serdtse": "Чӗре",
+  "bolshoe_serdtse": "Пысӑк чӗре",
+  "vzaimoponimanie": "Пӗр-пӗрне ӑнланни",
+  "kuritsa": "Кайӑк",
+  "kuritsa_fill": "Тултарнӑ кайӑк",
+  "tsvetok": "Чечек",
+  "tree": "Йывӑҫ"
+};
+export const chuvashDesignNames:Record<string,string>={
+  "diamond-ribbon": "Ромбсем",
+  "stepped-frieze": "Пусмасем",
+  "paired-birds": "Кайӑксем",
+  "keske-lace": "Кӗскӗ",
+  "sun-weave": "Хӗвелсем",
+  "tree-procession": "Йывӑҫсемпе чӗресем",
+  "hooked-meander": "Крючоксем",
+  "hatched-diamonds": "Штрихсем",
+  "ceremonial-tree": "Йывӑҫ",
+  "book-frame": "Ҫӑлтӑрлӑ рамкӑ",
+  "comb-rosette": "Турасем",
+  "hooked-rosette": "Туратсем",
+  "lozenge-ligature": "Ромб ҫыхӑнӑвӗ",
+  "toothed-diamonds": "Шӑллӑ ромбсем",
+  "horn-band": "Мӑйракасем",
+  "comb-band": "Тураллӑ йӗр",
+  "branch-medallion": "Медальон",
+  "lozenge-frame": "Ромблӑ рамкӑ",
+  "stitch-ribbon": "Ҫӗвӗ йӗрӗ",
+  "nested-chevrons": "Шевронсем",
+  "stepped-scrolls": "Пусмаллӑ скобӑсем",
+  "diagonal-scrolls": "Хӑялтӑр крючоксем",
+  "forked-frieze": "Вилкӑллӑ йӗр",
+  "panel-headpiece": "Виҫӗ пайлӑ пуҫлам"
+};
+export const chuvashBackgrounds:Record<string,string>={
+  "lozenge-net": "Ромблӑ сетка",
+  "keske-field": "Кӗскӗсем",
+  "stepped-carpet": "Шӑллӑ фон",
+  "woven-lattice": "Авнӑ сетка",
+  "cross-stitch": "Штрихлӑ ромбсем"
+};
