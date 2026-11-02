@@ -20,10 +20,23 @@ async function load(languages,stored){
 }
 function change(dom,element,value){element.value=value;element.dispatchEvent(new dom.window.Event('change',{bubbles:true}));}
 
+test('the published collection download contains the full horizontal image and uses a relative Pages path',async()=>{
+ const {dom,doc}=await load(['ru-RU']);
+ try{
+  const link=doc.querySelector('[data-testid=collection-download]');
+  assert.equal(link.getAttribute('href'),'./collection-16.png');
+  assert.equal(link.getAttribute('download'),'chuvash-16-patterns.png');
+  const png=readFileSync(new URL('../demo-dist/collection-16.png',import.meta.url));
+  assert.equal(png.readUInt32BE(16),4800);assert.equal(png.readUInt32BE(20),2700);
+  assert.deepEqual(png,readFileSync(new URL('../docs/brocade-review/all-sixteen-horizontal.png',import.meta.url)));
+  assert.equal(doc.querySelector('.preview article'),null);
+ }finally{dom.window.close();}
+});
+
 const groups={
- frame:['lozenge-frame','book-frame','border','corners'],
- band:['stitch-ribbon','nested-chevrons','stepped-scrolls','diagonal-scrolls','forked-frieze','lozenge-ligature','toothed-diamonds','horn-band','comb-band','hooked-meander','hatched-diamonds','diamond-ribbon','stepped-frieze','paired-birds','keske-lace','sun-weave','tree-procession','band'],
- headpiece:['panel-headpiece','ceremonial-tree'],tailpiece:['branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
+ frame:['ceremonial-frame','lozenge-frame','book-frame','border','corners'],
+ band:['embroidered-treasury','horn-lace','braided-hearts','double-horn','scarlet-lattice','heirloom-chain','stitch-ribbon','nested-chevrons','stepped-scrolls','diagonal-scrolls','forked-frieze','lozenge-ligature','toothed-diamonds','horn-band','comb-band','hooked-meander','hatched-diamonds','diamond-ribbon','stepped-frieze','paired-birds','keske-lace','sun-weave','tree-procession','band'],
+ headpiece:['regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
 };
 async function choose(dom,doc,id){
  const category=Object.keys(groups).find(key=>groups[key].includes(id));assert(category,id);
@@ -43,7 +56,7 @@ test('built demo starts in the system language, keeps code visible, and removes 
    assert.equal(doc.querySelectorAll('.category-picker button').length,6);
    assert.equal(doc.querySelector('.design-select'),null);
    assert.equal(doc.querySelector('.preview-heading'),null);
-   assert.equal(doc.querySelectorAll('.controls-column .composition-grid button').length,4);
+   assert.equal(doc.querySelectorAll('.controls-column .composition-grid button').length,11);
    for(const button of doc.querySelectorAll('.composition-grid button')){assert.equal(button.textContent.trim(),'');assert(button.getAttribute('aria-label'));}
    assert.equal(doc.querySelectorAll('.gallery,#catalog').length,0);
    assert.deepEqual(errors,[]);
@@ -85,7 +98,7 @@ test('all basic layouts and new compositions update the actual SVG and visible e
     assert(!doc.body.textContent.includes('undefined'),id);
    }
   }
-  assert.equal(seen.size,35);
+  assert.equal(seen.size,51);
   assert.deepEqual(errors,[]);
  }finally{dom.window.close();}
 });
@@ -121,7 +134,9 @@ test('settings follow the selected drawing and fill opacity is displayed as a pe
 test('in-context examples follow the ornament role, with real localized text',async()=>{
  const{dom,doc,errors}=await load(['en-US']);
  try{
-  assert.equal(doc.querySelector('.preview-mode button[aria-pressed=true]').textContent,'In context');
+  assert.equal(doc.querySelector('.preview-mode button[aria-pressed=true]').textContent,'Specimen');
+  assert.equal(doc.querySelector('.preview article'),null);
+  [...doc.querySelectorAll('.preview-mode button')].find(b=>b.textContent==='In context').click();await waitFor(()=>doc.querySelector('[data-context]'));
   for(const[design,role]of[['lozenge-ligature','band'],['ceremonial-tree','headpiece'],['branch-medallion','tailpiece'],['divider','divider'],['lozenge-frame','frame'],['tile','background']]){
    await choose(dom,doc,design);await waitFor(()=>doc.querySelector('[data-context]')?.dataset.context===role);
    const page=doc.querySelector('[data-context]');
@@ -159,6 +174,7 @@ test('switching to a clean specimen preserves the selected SVG, parameters and v
 test('background choices apply a repeating field and scaling changes CSS without changing the SVG',async()=>{
  const{dom,doc,errors}=await load(['en-US']);
  try{
+  [...doc.querySelectorAll('.preview-mode button')].find(b=>b.textContent==='In context').click();await pause();
   for(const id of groups.background){
    await choose(dom,doc,id);
    assert(doc.querySelector('[data-context=background]'));
@@ -214,6 +230,7 @@ test('Chuvash works automatically, persists manual choice and localizes every ca
   assert.equal(dom.window.localStorage.getItem('chuvash-ornaments.language'),'cv');
   assert.equal(doc.querySelector('.code-heading h2').textContent,'Код');
   assert(doc.querySelector('button').textContent.includes('Рамкӑсем'));
+  doc.querySelector('.preview-mode button[aria-pressed=false]').click();await waitFor(()=>doc.querySelector('[data-context]'));
   const seen=new Set();
   for(const id of Object.values(groups).flat()){
    await choose(dom,doc,id);seen.add(id);
@@ -224,7 +241,7 @@ test('Chuvash works automatically, persists manual choice and localizes every ca
    assert(/[ӑӗҫӳ]/.test(context.textContent),id);
    assert(!doc.body.textContent.includes('undefined'),id);
   }
-  assert.equal(seen.size,35);
+  assert.equal(seen.size,51);
   await choose(dom,doc,'motif');
   const motif=doc.querySelector('.motif-select select');assert.equal(motif.options.length,16);
   assert(motif.textContent.includes('Чӗре'));assert(motif.textContent.includes('Йывӑҫ'));

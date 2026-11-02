@@ -1,4 +1,4 @@
-import { BOOK_STUDIES, BACKGROUNDS, type BackgroundId, type CompositionId, type Params, type ParamsInput } from '@daniilak/chuvash-ornaments';
+import { ELITE_STUDIES, BOOK_STUDIES, BACKGROUNDS, type BackgroundId, type CompositionId, type Params, type ParamsInput } from '@daniilak/chuvash-ornaments';
 import {chuvashDesignNames,type Language} from './i18n';
 type Copy = {name:string};
 export interface DesignInfo {
@@ -8,6 +8,7 @@ export interface DesignInfo {
 }
 /** Short interface names; the library retains the original catalog and recipe names. */
 export const designInfo:Record<CompositionId,DesignInfo>={
+ ...Object.fromEntries(ELITE_STUDIES.map(b=>[b.id,{ru:{name:b.name.ru},en:{name:b.name.en},fill:'outline',opacity:true}])) as Record<typeof ELITE_STUDIES[number]['id'],DesignInfo>,
  ...Object.fromEntries(BOOK_STUDIES.map(b=>[b.id,{ru:{name:b.name.ru},en:{name:b.name.en},fill:'outline',opacity:true}])) as Record<typeof BOOK_STUDIES[number]['id'],DesignInfo>,
  'diamond-ribbon':{ru:{name:'Ромбы'},en:{name:'Diamonds'},fill:'outline',opacity:true},
  'stepped-frieze':{ru:{name:'Ступени'},en:{name:'Steps'},fill:'outline',opacity:true},
@@ -40,7 +41,12 @@ export function sizeLimit(design:string,p:Pick<Params,'width'|'height'|'gap'|'la
  const W=p.width,H=p.height;
  let maximum:number;
  const background=BACKGROUNDS.find(b=>b.id===design);
- if(design==='panel-headpiece')maximum=30*Math.min(W*.9/150,H*.82/38);
+ if(design==='winged-headpiece')maximum=52*Math.min(W*.9/148,H*.8/52);
+ else if(design==='regal-headpiece')maximum=78*Math.min(W*.92/244,H*.82/82);
+ else if(ELITE_STUDIES.some(b=>b.id===design&&b.kind==='rosette'))maximum=Math.min(W,H)*.86;
+ else if(design==='ceremonial-frame')maximum=Math.min(W,H)*.2;
+ else if(ELITE_STUDIES.some(b=>b.id===design&&b.kind==='band'))maximum=Math.min(H*.8,W*.64)/1.3;
+ else if(design==='panel-headpiece')maximum=30*Math.min(W*.9/150,H*.82/38);
  else if(BOOK_STUDIES.some(b=>b.id===design))maximum=Math.min(H*.8,W*.65)/1.4;
  else if(background)maximum=Math.min(W,H)*background.sizeRatio;
  else if(design==='comb-rosette'||design==='hooked-rosette'||design==='branch-medallion')maximum=Math.min(W,H)*.88;

@@ -5,9 +5,10 @@ import {COMPOSITIONS,generateComposition,generateMotif,generateOrnament,generate
 const embed=(a,x,y,w,h)=>a.svg.replace(/^<svg[^>]*>/,`<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="0 0 ${a.width} ${a.height}">`);
 const label=(x,y,t)=>`<text x="${x}" y="${y}" font-family="Arial" font-size="18" fill="#292824">${t}</text>`;
 const save=(name,p)=>{const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980"><rect width="1440" height="980" fill="#f4f3ef"/>${p.join('')}</svg>`;writeFileSync(`docs/aesthetic-review/${name}.png`,new Resvg(svg,{font:{loadSystemFonts:true}}).render().asPng());};
-for(let page=0;page<6;page++){
+for(let page=0;page<Math.ceil(COMPOSITIONS.length/4);page++){
  const p=[];
  for(let j=0;j<4;j++){
+ if(!COMPOSITIONS[page*4+j])continue;
  const c=COMPOSITIONS[page*4+j],x=j%2*720,y=Math.floor(j/2)*490;
  const box=c.kind==='rosette'?{width:400,height:400,size:320}:c.kind==='frame'?{width:720,height:400,size:72}:c.kind==='divider'?{width:720,height:220,size:200}:{width:720,height:160,size:88};
  const a=generateComposition({composition:c.id,...box,seed:42});
@@ -21,7 +22,7 @@ for(let page=0;page<6;page++){
 }
 const arts=[fitFrame({color:'#8b1a1a',size:36},720,400),fitFrame({preset:'corners',color:'#8b1a1a',size:64},720,400),generateOrnament({preset:'band',color:'#8b1a1a',width:720,height:160,size:88}),generateOrnament({preset:'divider',color:'#8b1a1a',width:720,height:160,size:88}),generateMotif({color:'#8b1a1a'}),generateTile({color:'#8b1a1a',width:160,height:160,size:52,layout:'checkerboard'})];
 for(let page=0;page<2;page++)save(`basic-${page+1}`,arts.slice(page*4,page*4+4).map((a,i)=>label(i%2*720+20,Math.floor(i/2)*490+30,['border','corners','band','divider','motif','tile'][page*4+i])+embed(a,i%2*720+20,Math.floor(i/2)*490+50,680,400)));
-console.log('Large review sheets: 24 recipes in two seeds, outline and thumbnail; six basic presets.');
+console.log('Large review sheets: all recipes in two seeds, outline and thumbnail; six basic presets.');
 
 const old=JSON.parse(readFileSync('tests/pre-aesthetic-snapshots.json','utf8')).compositions;
 const revised=COMPOSITIONS.filter(c=>c.version===5);

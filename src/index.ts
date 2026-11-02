@@ -109,3 +109,5 @@ export type { BackgroundId, BackgroundParams, BackgroundResult } from './backgro
 
 export { BOOK_STUDIES } from './reference-recipes.js';
 export type { BookStudyId } from './reference-recipes.js';
+export { ELITE_STUDIES } from './elite-recipes.js';
+export type { EliteId } from './elite-recipes.js';

@@ -1,4 +1,5 @@
 import { refinedVersion, renderRefinedBand } from './refinements.js';
+import { ELITE_STUDIES, ELITE_COLOR, ELITE_ACCENT, renderEliteRecipe, type EliteId } from './elite-recipes.js';
 import { BOOK_STUDIES, renderReferenceRecipe, type BookStudyId } from './reference-recipes.js';
 import { ADDITIONAL_IDS, renderAdditionalRecipe, type AdditionalId } from './additional-recipes.js';
 import type { CompositionId as LegacyId } from './legacy-compositions.js';
@@ -9,7 +10,7 @@ import { escapeXML, fmt } from './geometry.js';
 import { normalizeParams, pick } from './params.js';
 import type { FrameResult, Generated, Params, ParamsInput, Point } from './types.js';
 
-export type CompositionId = 'diamond-ribbon' | 'stepped-frieze' | 'paired-birds' | 'keske-lace' | 'sun-weave' | 'tree-procession' | 'hooked-meander' | 'hatched-diamonds' | 'ceremonial-tree' | 'comb-rosette' | 'hooked-rosette' | 'book-frame' | AdditionalId | BookStudyId;
+export type CompositionId = 'diamond-ribbon' | 'stepped-frieze' | 'paired-birds' | 'keske-lace' | 'sun-weave' | 'tree-procession' | 'hooked-meander' | 'hatched-diamonds' | 'ceremonial-tree' | 'comb-rosette' | 'hooked-rosette' | 'book-frame' | AdditionalId | BookStudyId | EliteId;
 export interface CompositionParams extends Params {
   composition: CompositionId;
   compositionVersion: 1 | 2 | 3 | 4 | 5;
@@ -47,10 +48,13 @@ export const COMPOSITIONS = Object.freeze(([
   { id: 'branch-medallion', kind: 'rosette', name: Object.freeze({ ru: 'Ветвистый медальон', en: 'Branch medallion' }) },
   { id: 'lozenge-frame', kind: 'frame', name: Object.freeze({ ru: 'Ромбовая рамка', en: 'Lozenge frame' }) },
   ...BOOK_STUDIES.map(({id,kind,name})=>({id,kind,name})),
+  ...ELITE_STUDIES.map(({id,kind,name})=>({id,kind,name})),
 ] satisfies { id: CompositionId; kind: CompositionKind; name: { ru: string; en: string } }[]).map(item => Object.freeze({...item,version:refinedVersion(item.id)})));
 
 /** Contemporary geometric compositions inspired by the supplied book examples; not historical tracings. */
 export function generateComposition(input: ParamsInput & { composition?: CompositionId; compositionVersion?: 1 | 2 | 3 | 4 | 5; accentColor?: string } = {}): CompositionResult {
+  const elite=ELITE_STUDIES.find(b=>b.id===input.composition);
+  if(elite&&input.compositionVersion!==undefined&&input.compositionVersion!==3)throw new RangeError('This composition requires compositionVersion 3');
   const book=BOOK_STUDIES.find(b=>b.id===input.composition);
   if(book&&input.compositionVersion!==undefined&&input.compositionVersion!==4&&!(input.compositionVersion===5&&refinedVersion(book.id)===5))throw new RangeError('This composition requires compositionVersion 4 or its supported revision 5');
   const additional=(ADDITIONAL_IDS as readonly string[]).includes(input.composition??'');
@@ -60,11 +64,12 @@ export function generateComposition(input: ParamsInput & { composition?: Composi
   const composition = COMPOSITIONS.some(c => c.id === input.composition) ? input.composition! : 'diamond-ribbon';
   const kind=COMPOSITIONS.find(c=>c.id===composition)!.kind;
   const version=input.compositionVersion??refinedVersion(composition);
-  const p: CompositionParams = { ...normalizeParams({ width: kind==='rosette'?400:720, height: kind==='rosette'?400:kind==='frame'?400:kind==='divider'?220:160, size: book?book.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:80, count: 128, strokeWidth: 0.36, fillOpacity: 1, ...(book?{color:book.twoTone?'#292824':'#a64c38'}:{}), ...(version===5&&['nested-chevrons','forked-frieze'].includes(composition)?{gap:0}:{}), ...input, preset: 'band' }), composition, compositionVersion: version, ...(book?.twoTone?{accentColor:normalizeParams({color:input.accentColor??(book.id==='nested-chevrons'?'#c4a56d':'#a64c38')}).color}:{}) };
+  const p: CompositionParams = { ...normalizeParams({ width: kind==='rosette'?400:720, height: kind==='rosette'?400:kind==='frame'?400:kind==='divider'?220:160, size: elite?elite.size:book?book.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:80, count: 128, strokeWidth: 0.36, fillOpacity: 1, ...(book?{color:book.twoTone?'#292824':'#a64c38'}:{}), ...(elite?{color:ELITE_COLOR}:{}), ...(version===5&&['nested-chevrons','forked-frieze'].includes(composition)?{gap:0}:{}), ...input, preset: 'band' }), composition, compositionVersion: version, ...(elite||book?.twoTone?{accentColor:normalizeParams({color:input.accentColor??(elite?ELITE_ACCENT:book?.id==='nested-chevrons'?'#c4a56d':'#a64c38')}).color}:{}) };
   const d = new Drawing(p), studies: StudyPlacement[] = [];
   let inset: FrameResult['inset']|undefined;
   const result = (): CompositionResult => ({ ...d.result(), params: p, studies, ...(inset?{inset}:{}) });
   if (p.width <= 0 || p.height <= 0 || p.size <= 0) return result();
+  if(elite){inset=renderEliteRecipe(d,p,studies);return result();}
   if(version===5&&['stepped-frieze','tree-procession','keske-lace'].includes(composition)){renderRefinedBand(d,p,studies);return result();}
   if(book){renderReferenceRecipe(d,p,studies);return result();}
   if(additional){inset=renderAdditionalRecipe(d,p,studies);return result();}

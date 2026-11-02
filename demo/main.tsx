@@ -1,6 +1,6 @@
 import React,{useEffect,useState}from'react';
 import{createRoot}from'react-dom/client';
-import{MOTIFS,BOOK_STUDIES,COMPOSITIONS,BACKGROUNDS,generateBackground,generateMotif,generateOrnament,generateTile,fitFrame,generateComposition,getMotif}from'@daniilak/chuvash-ornaments';
+import{MOTIFS,ELITE_STUDIES,BOOK_STUDIES,COMPOSITIONS,BACKGROUNDS,generateBackground,generateMotif,generateOrnament,generateTile,fitFrame,generateComposition,getMotif}from'@daniilak/chuvash-ornaments';
 import{Framed}from'@daniilak/chuvash-ornaments/react';
 import type{ParamsInput,Preset,Sequence,MotifId,FrameResult,CompositionKind}from'@daniilak/chuvash-ornaments';
 import{text,englishMotifs,chuvashMotifs,chuvashBackgrounds,resolveLanguage,type Preference}from'./i18n';
@@ -9,7 +9,7 @@ import{ContextPreview,contextKind}from'./context-preview';
 import{svgUrl}from'./svg-url';
 import'./vendor/hemingway/style.css';
 import'./style.css';
-const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(18),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
+const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(24),...COMPOSITIONS.slice(18,24),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
 const categories=['frame','band','headpiece','tailpiece','divider','background'] as const;
 function thumbnail(id:string,seed:number,color:string){
  const c=COMPOSITIONS.find(c=>c.id===id),background=BACKGROUNDS.find(b=>b.id===id);
@@ -39,35 +39,37 @@ function App(){
  useEffect(()=>{document.documentElement.lang=lang;document.title=t.title;document.querySelector('meta[name="description"]')?.setAttribute('content',t.description);},[lang,t]);
  useEffect(()=>{const update=()=>setLanguages(navigator.languages?.length?navigator.languages:[navigator.language]);window.addEventListener('languagechange',update);return()=>window.removeEventListener('languagechange',update);},[]);
  const language=(v:Preference)=>{setPref(v);try{v==='system'?localStorage.removeItem(storageKey):localStorage.setItem(storageKey,v);}catch{}};
- const[design,setDesign]=useState('branch-medallion');
- const[view,setView]=useState<'context'|'specimen'>('context');
+ const[design,setDesign]=useState('imperial-keske');
+ const[view,setView]=useState<'context'|'specimen'>('specimen');
  const[backgroundScale,setBackgroundScale]=useState(75);
- const[params,setParams]=useState<ParamsInput & {accentColor?:string}>({motif:'serdtse',seed:42,width:400,height:400,size:320,gap:12,count:128,strokeWidth:.36,color:'#8b1a1a',fillOpacity:1,sequence:'seeded'});
+ const[params,setParams]=useState<ParamsInput & {accentColor?:string}>({motif:'serdtse',seed:42,width:400,height:400,size:320,gap:12,count:128,strokeWidth:.36,color:'#762b32',accentColor:'#aa8247',fillOpacity:1,sequence:'seeded'});
  const[notice,setNotice]=useState<'copied'|'copyFail'|'downloaded'|''>('');
  const recipe=COMPOSITIONS.find(c=>c.id===design),backgroundRecipe=BACKGROUNDS.find(b=>b.id===design);
  const book=BOOK_STUDIES.find(b=>b.id===design);
+ const elite=ELITE_STUDIES.find(b=>b.id===design),twoTone=!!elite||!!book?.twoTone;
  const info=recipe?designInfo[recipe.id]:backgroundRecipe?backgroundInfo[backgroundRecipe.id]:undefined;
  const baseFrame=design==='border'||design==='corners',frame=baseFrame||recipe?.kind==='frame',rosette=recipe?.kind==='rosette',tile=design==='tile'||!!backgroundRecipe,motif=design==='motif';
  const result=backgroundRecipe?generateBackground({...params,background:backgroundRecipe.id}):recipe?generateComposition({...params,composition:recipe.id}):motif?generateMotif(params):tile?generateTile(params):baseFrame?fitFrame({...params,preset:design as Preset},params.width!,params.height!):generateOrnament({...params,preset:design as Preset});
  const q=result.params;
+ const secondInk='accentColor' in q?String(q.accentColor):'#a64c38';
  const category=contextKind(design,backgroundRecipe?'background':recipe?.kind);
  const visibleChoices=choices.filter(c=>contextKind(c.id,c.kind)===category);
  const choiceName=(id:string)=>{const c=COMPOSITIONS.find(c=>c.id===id);const b=BACKGROUNDS.find(b=>b.id===id);return c?designCopy(c.id,lang).name:b?(lang==='cv'?chuvashBackgrounds[b.id]:b.name[lang]):t[id as 'motif'];};
- const showVariation=!motif&&!rosette&&(!!recipe||!!backgroundRecipe||q.sequence==='seeded');
+ const showVariation=!motif&&!rosette&&(!elite||elite.id==='heirloom-chain')&&(!!recipe||!!backgroundRecipe||q.sequence==='seeded');
  const update=(patch:ParamsInput & {accentColor?:string})=>{setParams(old=>fitUiParams(design,old,patch));setNotice('');};
  function selectDesign(id:string){
-  const book=BOOK_STUDIES.find(b=>b.id===id);
+  const book=BOOK_STUDIES.find(b=>b.id===id),elite=ELITE_STUDIES.find(b=>b.id===id);
   const kind=COMPOSITIONS.find(c=>c.id===id)?.kind,bg=BACKGROUNDS.find(b=>b.id===id);
   if(bg||id==='tile')setBackgroundScale(75);
-  const defaults={...(book&&['nested-chevrons','forked-frieze'].includes(id)?{gap:0}:{gap:12}),width:bg?160:kind==='rosette'?400:id==='tile'?160:720,height:bg?160:kind==='rosette'?400:kind==='frame'?400:kind==='divider'?220:id==='tile'?160:id==='motif'?300:id==='border'||id==='corners'?400:160,size:book?book.size:bg?bg.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:id==='tile'?52:id==='border'||id==='corners'?36:80};
-  setDesign(id);setParams(old=>fitUiParams(id,old,{...defaults,...(book?{color:book.twoTone?'#292824':'#a64c38',accentColor:book.id==='nested-chevrons'?'#c4a56d':'#a64c38'}:{}),...(id==='tile'?{layout:'checkerboard' as const,sequence:'mirror' as const}:{}),count:128,fill:true,fillOpacity:1}));setNotice('');
+  const defaults={...(book&&['nested-chevrons','forked-frieze'].includes(id)?{gap:0}:{gap:12}),width:bg?160:kind==='rosette'?400:id==='tile'?160:720,height:bg?160:kind==='rosette'?400:kind==='frame'?400:kind==='divider'?220:id==='tile'?160:id==='motif'?300:id==='border'||id==='corners'?400:160,size:elite?elite.size:book?book.size:bg?bg.size:kind==='rosette'?320:kind==='frame'?72:kind==='divider'?200:id==='tile'?52:id==='border'||id==='corners'?36:80};
+  setDesign(id);setParams(old=>fitUiParams(id,old,{...defaults,...(elite?{color:'#762b32',accentColor:'#aa8247'}:{}),...(book?{color:book.twoTone?'#292824':'#a64c38',accentColor:book.id==='nested-chevrons'?'#c4a56d':'#a64c38'}:{}),...(id==='tile'?{layout:'checkerboard' as const,sequence:'mirror' as const}:{}),count:128,fill:true,fillOpacity:1}));setNotice('');
  }
  const sizeName=design==='corners'?t.cornerSize:frame?t.frameSize:rosette?t.figureSize:design==='ceremonial-tree'?t.treeSize:t.size;
  const sourceHasFill=!!getMotif(q.motif).fills?.length;
  const fillMode=info?.fill??(sourceHasFill?'outline':'none');
  const opacity=(info?.opacity??sourceHasFill)&&(q.fill||fillMode==='fixed');
  const settings:Record<string,unknown>={};
- if(backgroundRecipe){settings.background=backgroundRecipe.id;settings.backgroundVersion=1;}else if(recipe){settings.composition=recipe.id;settings.compositionVersion=recipe.version;if(book?.twoTone)settings.accentColor=params.accentColor??'#a64c38';}else if(!motif&&!tile)settings.preset=design;
+ if(backgroundRecipe){settings.background=backgroundRecipe.id;settings.backgroundVersion=1;}else if(recipe){settings.composition=recipe.id;settings.compositionVersion=recipe.version;if(twoTone)settings.accentColor=secondInk;}else if(!motif&&!tile)settings.preset=design;
  if(!recipe&&!backgroundRecipe)settings.motif=q.motif;
  if(!recipe&&!backgroundRecipe&&!motif){settings.motifs=q.motifs;settings.sequence=q.sequence;}
  if(!motif)settings.seed=q.seed;
@@ -102,11 +104,11 @@ function App(){
     <section className="settings-section"><h2>{t.appearance}</h2>
      {!recipe&&!backgroundRecipe&&<label className="field motif-select"><span>{t.sourceMotif}</span><select aria-label={t.sourceMotif} value={q.motif} onChange={e=>update({motif:e.target.value as MotifId,motifs:undefined})}>{MOTIFS.map(m=><option key={m.id} value={m.id}>{lang==='ru'?m.name:lang==='cv'?chuvashMotifs[m.id]:englishMotifs[m.id]}</option>)}</select></label>}
      <label className="color-field"><span>{t.color}</span><div><input aria-label={t.color} type="color" value={q.color} onChange={e=>update({color:e.target.value})}/><code>{q.color}</code></div></label>
-     {book?.twoTone&&<label className="color-field"><span>{t.accentColor}</span><div><input aria-label={t.accentColor} type="color" value={params.accentColor??'#a64c38'} onChange={e=>update({accentColor:e.target.value})}/><code>{params.accentColor??'#a64c38'}</code></div></label>}
+     {twoTone&&<label className="color-field"><span>{t.accentColor}</span><div><input aria-label={t.accentColor} type="color" value={secondInk} onChange={e=>update({accentColor:e.target.value})}/><code>{secondInk}</code></div></label>}
      {tile&&<label className="field"><span>{t.backgroundScale}<output>{backgroundScale}<small> %</small></output></span><input aria-label={t.backgroundScale} type="range" min="40" max="160" step="5" value={backgroundScale} onChange={e=>setBackgroundScale(Number(e.target.value))}/></label>}
      {!motif&&slider(sizeName,'size',8,sizeLimit(design,q),1,'px')}
-     {!motif&&!rosette&&!backgroundRecipe&&book?.id!=='panel-headpiece'&&slider(t.gap,'gap',0,tile?Math.min(48,Math.max(0,Math.min(q.width,q.height)/(q.layout==='checkerboard'?2:1)-8)):48,1,'px')}
-     {(!rosette||!q.fill)&&!(book?.id==='stitch-ribbon'&&q.fill)&&!(backgroundRecipe?.id==='stepped-carpet'&&q.fill)&&slider(t.stroke,'strokeWidth',.04,.8,.02)}
+     {!motif&&!rosette&&!backgroundRecipe&&book?.id!=='panel-headpiece'&&!elite?.id.includes('headpiece')&&slider(t.gap,'gap',0,tile?Math.min(48,Math.max(0,Math.min(q.width,q.height)/(q.layout==='checkerboard'?2:1)-8)):48,1,'px')}
+     {(!rosette||!q.fill||!!elite)&&!(book?.id==='stitch-ribbon'&&q.fill)&&!(backgroundRecipe?.id==='stepped-carpet'&&q.fill)&&slider(t.stroke,'strokeWidth',.04,.8,.02)}
      {(fillMode==='outline'||fillMode==='hatch')&&<label className="checkbox"><input aria-label={fillMode==='hatch'?t.hatch:t.outline} type="checkbox" checked={fillMode==='hatch'?q.fill:!q.fill} onChange={e=>update({fill:fillMode==='hatch'?e.target.checked:!e.target.checked})}/><span>{fillMode==='hatch'?t.hatch:t.outline}</span></label>}
      {opacity&&slider(t.opacity,'fillOpacity',0,1,.01,'%')}
     </section>
@@ -122,7 +124,7 @@ function App(){
     <div className={`preview ${view==='context'?'in-context':''}`} data-testid="preview">
      {view==='context'?<ContextPreview kind={contextKind(design,backgroundRecipe?'background':recipe?.kind)} result={result} inset={inset} lang={lang} repeatScale={backgroundScale/100}/>:tile?<div className="background-specimen" data-testid="tile-grid" style={{backgroundImage:`url("${svgUrl(result.svg)}")`,backgroundSize:repeatSize,backgroundPosition:'center'}}/>:<div className="art-stage" data-testid="art-stage" style={{aspectRatio:`${q.width}/${q.height}`,maxWidth:`${460*q.width/q.height}px`}}><SVG className="art-svg" svg={result.svg}/></div>}
     </div>
-    <div className="actions"><button onClick={download}>{t.download}</button><span role="status">{notice?t[notice]:''}</span></div>
+    <div className="actions"><button onClick={download}>{t.download}</button><a data-testid="collection-download" href={`${import.meta.env.BASE_URL}collection-16.png`} download="chuvash-16-patterns.png">{t.collection}</a><span role="status">{notice?t[notice]:''}</span></div>
     <section className="code-panel" aria-label={t.code}><div className="code-heading"><h2>{t.code}</h2><button onClick={copyCode}>{t.copy}</button></div><pre data-testid="example-code"><code>{code}</code></pre></section>
     {baseFrame&&<section className="live-frame"><p>{t.resize}</p><Framed preset={design as'border'|'corners'} motif={q.motif} seed={q.seed} motifs={q.motifs} sequence={q.sequence} size={q.size} gap={q.gap} strokeWidth={q.strokeWidth} fill={q.fill} fillOpacity={q.fillOpacity} rotation={q.rotation} reflect={q.reflect} color={q.color} style={{resize:'both',overflow:'auto',width:'100%',maxWidth:'100%',minWidth:160,minHeight:180,height:240,background:'#fff'}}><h2>{t.cardTitle}</h2><p>{t.cardText}</p></Framed></section>}
    </div>
