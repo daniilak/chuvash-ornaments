@@ -42,9 +42,11 @@ export function sizeLimit(design:string,p:Pick<Params,'width'|'height'|'gap'|'la
  let maximum:number;
  const background=BACKGROUNDS.find(b=>b.id===design);
  if(design==='winged-headpiece')maximum=52*Math.min(W*.9/148,H*.8/52);
+ else if(['sovereign-headpiece','procession-headpiece','heart-canopy-headpiece'].includes(design))maximum=88*Math.min(W*.92/264,H*.82/88);
+ else if(ELITE_STUDIES.some(b=>b.id===design&&b.kind==='separator'))maximum=64*Math.min(W*.92/244,H*.78/64);
  else if(design==='regal-headpiece')maximum=78*Math.min(W*.92/244,H*.82/82);
  else if(ELITE_STUDIES.some(b=>b.id===design&&b.kind==='rosette'))maximum=Math.min(W,H)*.86;
- else if(design==='ceremonial-frame')maximum=Math.min(W,H)*.2;
+ else if(ELITE_STUDIES.some(b=>b.id===design&&b.kind==='frame'))maximum=Math.min(W,H)*.2;
  else if(ELITE_STUDIES.some(b=>b.id===design&&b.kind==='band'))maximum=Math.min(H*.8,W*.64)/1.3;
  else if(design==='panel-headpiece')maximum=30*Math.min(W*.9/150,H*.82/38);
  else if(BOOK_STUDIES.some(b=>b.id===design))maximum=Math.min(H*.8,W*.65)/1.4;

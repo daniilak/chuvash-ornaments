@@ -30,13 +30,17 @@ test('the published collection download contains the full horizontal image and u
   assert.equal(png.readUInt32BE(16),4800);assert.equal(png.readUInt32BE(20),2700);
   assert.deepEqual(png,readFileSync(new URL('../docs/brocade-review/all-sixteen-horizontal.png',import.meta.url)));
   assert.equal(doc.querySelector('.preview article'),null);
+  const layouts=doc.querySelector('[data-testid=layouts-download]');
+  assert.equal(layouts.getAttribute('href'),'./collection-layouts.png');
+  const newPng=readFileSync(new URL('../demo-dist/collection-layouts.png',import.meta.url));
+  assert.equal(newPng.readUInt32BE(16),3600);assert.equal(newPng.readUInt32BE(20),2200);
  }finally{dom.window.close();}
 });
 
 const groups={
- frame:['ceremonial-frame','lozenge-frame','book-frame','border','corners'],
+ frame:['keske-treasure-frame','horn-gate-frame','heart-diadem-frame','ceremonial-frame','lozenge-frame','book-frame','border','corners'],
  band:['embroidered-treasury','horn-lace','braided-hearts','double-horn','scarlet-lattice','heirloom-chain','stitch-ribbon','nested-chevrons','stepped-scrolls','diagonal-scrolls','forked-frieze','lozenge-ligature','toothed-diamonds','horn-band','comb-band','hooked-meander','hatched-diamonds','diamond-ribbon','stepped-frieze','paired-birds','keske-lace','sun-weave','tree-procession','band'],
- headpiece:['regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
+ headpiece:['sovereign-headpiece','procession-headpiece','heart-canopy-headpiece','regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['sun-needle-divider','wing-knot-divider','triple-keske-divider','divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
 };
 async function choose(dom,doc,id){
  const category=Object.keys(groups).find(key=>groups[key].includes(id));assert(category,id);
@@ -56,7 +60,7 @@ test('built demo starts in the system language, keeps code visible, and removes 
    assert.equal(doc.querySelectorAll('.category-picker button').length,6);
    assert.equal(doc.querySelector('.design-select'),null);
    assert.equal(doc.querySelector('.preview-heading'),null);
-   assert.equal(doc.querySelectorAll('.controls-column .composition-grid button').length,11);
+   assert.equal(doc.querySelectorAll('.controls-column .composition-grid button').length,8);
    for(const button of doc.querySelectorAll('.composition-grid button')){assert.equal(button.textContent.trim(),'');assert(button.getAttribute('aria-label'));}
    assert.equal(doc.querySelectorAll('.gallery,#catalog').length,0);
    assert.deepEqual(errors,[]);
@@ -98,7 +102,7 @@ test('all basic layouts and new compositions update the actual SVG and visible e
     assert(!doc.body.textContent.includes('undefined'),id);
    }
   }
-  assert.equal(seen.size,51);
+  assert.equal(seen.size,60);
   assert.deepEqual(errors,[]);
  }finally{dom.window.close();}
 });
@@ -137,7 +141,7 @@ test('in-context examples follow the ornament role, with real localized text',as
   assert.equal(doc.querySelector('.preview-mode button[aria-pressed=true]').textContent,'Specimen');
   assert.equal(doc.querySelector('.preview article'),null);
   [...doc.querySelectorAll('.preview-mode button')].find(b=>b.textContent==='In context').click();await waitFor(()=>doc.querySelector('[data-context]'));
-  for(const[design,role]of[['lozenge-ligature','band'],['ceremonial-tree','headpiece'],['branch-medallion','tailpiece'],['divider','divider'],['lozenge-frame','frame'],['tile','background']]){
+  for(const[design,role]of[['lozenge-ligature','band'],['ceremonial-tree','headpiece'],['branch-medallion','tailpiece'],['divider','divider'],['sun-needle-divider','divider'],['triple-keske-divider','divider'],['sovereign-headpiece','headpiece'],['horn-gate-frame','frame'],['lozenge-frame','frame'],['tile','background']]){
    await choose(dom,doc,design);await waitFor(()=>doc.querySelector('[data-context]')?.dataset.context===role);
    const page=doc.querySelector('[data-context]');
    assert(page.querySelector('h2'));assert(page.querySelector('p:not(.context-chapter)').textContent.length>30);
@@ -241,7 +245,7 @@ test('Chuvash works automatically, persists manual choice and localizes every ca
    assert(/[ӑӗҫӳ]/.test(context.textContent),id);
    assert(!doc.body.textContent.includes('undefined'),id);
   }
-  assert.equal(seen.size,51);
+  assert.equal(seen.size,60);
   await choose(dom,doc,'motif');
   const motif=doc.querySelector('.motif-select select');assert.equal(motif.options.length,16);
   assert(motif.textContent.includes('Чӗре'));assert(motif.textContent.includes('Йывӑҫ'));

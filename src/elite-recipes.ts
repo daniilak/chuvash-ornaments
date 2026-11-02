@@ -6,6 +6,7 @@ import type { CompositionParams, StudyPlacement } from './compositions.js';
 import type { FrameResult, MotifId, Point } from './types.js';
 import { ATELIER_STUDIES, renderAtelierRecipe } from './atelier-recipes.js';
 import { BROCADE_STUDIES, renderBrocadeRecipe } from './brocade-recipes.js';
+import { CEREMONIAL_LAYOUTS, renderCeremonialLayout } from './ceremonial-layouts.js';
 
 /** Contemporary ceremonial studies; names do not assert historical provenance. */
 export const ELITE_STUDIES = Object.freeze(([
@@ -15,6 +16,7 @@ export const ELITE_STUDIES = Object.freeze(([
   {id:'ceremonial-frame',kind:'frame',name:{ru:'Парадная рамка',en:'Ceremonial frame'},size:64},
   ...ATELIER_STUDIES,
   ...BROCADE_STUDIES,
+  ...CEREMONIAL_LAYOUTS,
 ] as const).map(item=>Object.freeze({...item,name:Object.freeze(item.name)})));
 export type EliteId = typeof ELITE_STUDIES[number]['id'];
 export const ELITE_COLOR='#762b32', ELITE_ACCENT='#aa8247';
@@ -28,6 +30,7 @@ const stepRing:Polygon=[
 ];
 
 export function renderEliteRecipe(d:Drawing,p:CompositionParams,studies:StudyPlacement[]):FrameResult['inset']|undefined{
+  if(CEREMONIAL_LAYOUTS.some(b=>b.id===p.composition))return renderCeremonialLayout(d,p,studies);
   if(BROCADE_STUDIES.some(b=>b.id===p.composition)){renderBrocadeRecipe(d,p,studies);return;}
   if(ATELIER_STUDIES.some(b=>b.id===p.composition)){renderAtelierRecipe(d,p,studies);return;}
   const ink=new Ink(d,p),gold=new Ink(d,{...p,color:p.accentColor??ELITE_ACCENT}),W=p.width,H=p.height;

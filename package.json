@@ -48,7 +48,7 @@
     "prepack": "npm run build",
     "prepublishOnly": "npm run check",
     "check:demo": "node --test tests/demo-ui.check.mjs",
-    "examples:render": "npm run build && node scripts/render-compositions.mjs && node scripts/render-more-ornaments.mjs && node scripts/render-art-review.mjs && node scripts/render-backgrounds.mjs && node scripts/render-reference-studies.mjs && node scripts/render-aesthetic-review.mjs && node scripts/render-elite-studies.mjs && node scripts/render-atelier-studies.mjs && node scripts/render-brocade-studies.mjs"
+    "examples:render": "npm run build && node scripts/render-compositions.mjs && node scripts/render-more-ornaments.mjs && node scripts/render-art-review.mjs && node scripts/render-backgrounds.mjs && node scripts/render-reference-studies.mjs && node scripts/render-aesthetic-review.mjs && node scripts/render-elite-studies.mjs && node scripts/render-atelier-studies.mjs && node scripts/render-brocade-studies.mjs && node scripts/render-ceremonial-layouts.mjs"
   },
   "peerDependencies": {
     "react": ">=18"
