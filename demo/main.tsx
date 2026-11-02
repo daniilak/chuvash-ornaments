@@ -7,15 +7,11 @@ import{text,englishMotifs,chuvashMotifs,chuvashBackgrounds,resolveLanguage,type 
 import{designInfo,backgroundInfo,designCopy,sizeLimit,fitUiParams}from'./designs';
 import{ContextPreview,contextKind}from'./context-preview';
 import{svgUrl}from'./svg-url';
+import{saveBlob,svgToPng}from'./download';
 import'./vendor/hemingway/style.css';
 import'./style.css';
 const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(49),...COMPOSITIONS.slice(40,49),...COMPOSITIONS.slice(24,40),...COMPOSITIONS.slice(18,24),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
 const categories=['frame','band','headpiece','tailpiece','divider','background'] as const;
-const pngCollections=[
- {id:'deer',file:'collection-deer.png',filename:'chuvash-deer-patterns.png',label:'deerCollection'},
- {id:'layouts',file:'collection-layouts.png',filename:'chuvash-frames-dividers-headpieces.png',label:'layoutCollection'},
- {id:'original',file:'collection-16.png',filename:'chuvash-16-patterns.png',label:'collection'},
-] as const;
 function thumbnail(id:string,seed:number,color:string){
  const c=COMPOSITIONS.find(c=>c.id===id),background=BACKGROUNDS.find(b=>b.id===id);
  const book=BOOK_STUDIES.find(b=>b.id===id);
@@ -48,7 +44,8 @@ function App(){
  const[view,setView]=useState<'context'|'specimen'>('specimen');
  const[backgroundScale,setBackgroundScale]=useState(75);
  const[params,setParams]=useState<ParamsInput & {accentColor?:string}>({motif:'serdtse',seed:42,width:720,height:220,size:200,gap:12,count:128,strokeWidth:.36,color:'#762b32',accentColor:'#aa8247',fillOpacity:1,sequence:'seeded'});
- const[notice,setNotice]=useState<'copied'|'copyFail'|'downloaded'|''>('');
+ const[notice,setNotice]=useState<'copied'|'copyFail'|'downloaded'|'pngDownloaded'|'downloadFail'|''>('');
+ const[exportingPng,setExportingPng]=useState(false);
  const recipe=COMPOSITIONS.find(c=>c.id===design),backgroundRecipe=BACKGROUNDS.find(b=>b.id===design);
  const book=BOOK_STUDIES.find(b=>b.id===design);
  const elite=ELITE_STUDIES.find(b=>b.id===design),twoTone=!!elite||!!book?.twoTone;
@@ -90,8 +87,13 @@ function App(){
  const usage=tile?['container.style.backgroundImage =', '  `url("data:image/svg+xml,${encodeURIComponent(art.svg)}")`;', "container.style.backgroundRepeat = 'repeat';", "container.style.backgroundPosition = 'center';", `container.style.backgroundSize = '${repeatSize}';`].join('\n'):'container.innerHTML = art.svg;';
  const code=`import { ${fn} }\n  from '@daniilak/chuvash-ornaments';\n\nconst art = ${fn}(${JSON.stringify(settings,null,2)}${baseFrame?', '+q.width+', '+q.height:''});\n\n${usage}`;
  async function copyCode(){try{await navigator.clipboard.writeText(code);setNotice('copied');}catch{setNotice('copyFail');}}
- function download(){const url=URL.createObjectURL(new Blob([result.svg],{type:'image/svg+xml;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`chuvash-${design}-${q.seed}.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setNotice('downloaded');}
- function downloadPng(id:string){const collection=pngCollections.find(c=>c.id===id);if(!collection)return;const a=document.createElement('a');a.href=`${import.meta.env.BASE_URL}${collection.file}`;a.download=collection.filename;a.click();setNotice('');}
+ function download(){saveBlob(new Blob([result.svg],{type:'image/svg+xml;charset=utf-8'}),`chuvash-${design}-${q.seed}.svg`);setNotice('downloaded');}
+ async function downloadPng(){
+  setExportingPng(true);setNotice('');
+  try{const png=await svgToPng(result.svg,result.width,result.height);saveBlob(png,`chuvash-${design}-${q.seed}.png`);setNotice('pngDownloaded');}
+  catch{setNotice('downloadFail');}
+  finally{setExportingPng(false);}
+ }
  function slider(label:string,key:'strokeWidth'|'size'|'gap'|'fillOpacity',min:number,max:number,step:number,unit=''){
   const value=Number(q[key]),formatted=key==='fillOpacity'?Math.round(value*100):value;
   return<label className="field"><span>{label}<output>{formatted.toLocaleString(lang,{maximumFractionDigits:2})}{unit&&<small> {unit}</small>}</output></span><input aria-label={label} type="range" min={min} max={max} step={step} value={value} onChange={e=>update({[key]:Number(e.target.value)})}/></label>;
@@ -130,7 +132,7 @@ function App(){
     <div className={`preview ${view==='context'?'in-context':''}`} data-testid="preview">
      {view==='context'?<ContextPreview kind={contextKind(design,backgroundRecipe?'background':recipe?.kind)} result={result} inset={inset} lang={lang} repeatScale={backgroundScale/100}/>:tile?<div className="background-specimen" data-testid="tile-grid" style={{backgroundImage:`url("${svgUrl(result.svg)}")`,backgroundSize:repeatSize,backgroundPosition:'center'}}/>:<div className="art-stage" data-testid="art-stage" style={{aspectRatio:`${q.width}/${q.height}`,maxWidth:`${460*q.width/q.height}px`}}><SVG className="art-svg" svg={result.svg}/></div>}
     </div>
-    <div className="actions"><button onClick={download}>{t.download}</button><select className="png-download" data-testid="png-download" aria-label={t.downloadPng} defaultValue="" onChange={e=>{downloadPng(e.currentTarget.value);e.currentTarget.value='';}}><option value="" disabled>{t.downloadPng}</option>{pngCollections.map(c=><option key={c.id} value={c.id}>{t[c.label]}</option>)}</select><span role="status">{notice?t[notice]:''}</span></div>
+    <div className="actions"><button onClick={download}>{t.download}</button><button type="button" className="png-download" data-testid="png-download" onClick={downloadPng} disabled={exportingPng} aria-busy={exportingPng}>{t.downloadPng}</button><span role="status">{notice?t[notice]:''}</span></div>
     <section className="code-panel" aria-label={t.code}><div className="code-heading"><h2>{t.code}</h2><button onClick={copyCode}>{t.copy}</button></div><pre data-testid="example-code"><code>{code}</code></pre></section>
     {baseFrame&&<section className="live-frame"><p>{t.resize}</p><Framed preset={design as'border'|'corners'} motif={q.motif} seed={q.seed} motifs={q.motifs} sequence={q.sequence} size={q.size} gap={q.gap} strokeWidth={q.strokeWidth} fill={q.fill} fillOpacity={q.fillOpacity} rotation={q.rotation} reflect={q.reflect} color={q.color} style={{resize:'both',overflow:'auto',width:'100%',maxWidth:'100%',minWidth:160,minHeight:180,height:240,background:'#fff'}}><h2>{t.cardTitle}</h2><p>{t.cardText}</p></Framed></section>}
    </div>
