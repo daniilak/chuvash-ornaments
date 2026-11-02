@@ -34,13 +34,16 @@ test('the published collection download contains the full horizontal image and u
   assert.equal(layouts.getAttribute('href'),'./collection-layouts.png');
   const newPng=readFileSync(new URL('../demo-dist/collection-layouts.png',import.meta.url));
   assert.equal(newPng.readUInt32BE(16),3600);assert.equal(newPng.readUInt32BE(20),2200);
+  assert.equal(doc.querySelector('[data-testid=deer-download]').getAttribute('href'),'./collection-deer.png');
+  const deer=readFileSync(new URL('../demo-dist/collection-deer.png',import.meta.url));
+  assert.equal(deer.readUInt32BE(16),3600);assert.equal(deer.readUInt32BE(20),1800);
  }finally{dom.window.close();}
 });
 
 const groups={
- frame:['keske-treasure-frame','horn-gate-frame','heart-diadem-frame','ceremonial-frame','lozenge-frame','book-frame','border','corners'],
- band:['embroidered-treasury','horn-lace','braided-hearts','double-horn','scarlet-lattice','heirloom-chain','stitch-ribbon','nested-chevrons','stepped-scrolls','diagonal-scrolls','forked-frieze','lozenge-ligature','toothed-diamonds','horn-band','comb-band','hooked-meander','hatched-diamonds','diamond-ribbon','stepped-frieze','paired-birds','keske-lace','sun-weave','tree-procession','band'],
- headpiece:['sovereign-headpiece','procession-headpiece','heart-canopy-headpiece','regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['sun-needle-divider','wing-knot-divider','triple-keske-divider','divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
+ frame:['deer-tapestry-frame','keske-treasure-frame','horn-gate-frame','heart-diadem-frame','ceremonial-frame','lozenge-frame','book-frame','border','corners'],
+ band:['deer-procession','deer-and-suns','embroidered-treasury','horn-lace','braided-hearts','double-horn','scarlet-lattice','heirloom-chain','stitch-ribbon','nested-chevrons','stepped-scrolls','diagonal-scrolls','forked-frieze','lozenge-ligature','toothed-diamonds','horn-band','comb-band','hooked-meander','hatched-diamonds','diamond-ribbon','stepped-frieze','paired-birds','keske-lace','sun-weave','tree-procession','band'],
+ headpiece:['deer-guardians','deer-crest','sovereign-headpiece','procession-headpiece','heart-canopy-headpiece','regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['deer-sun-divider','sun-needle-divider','wing-knot-divider','triple-keske-divider','divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
 };
 async function choose(dom,doc,id){
  const category=Object.keys(groups).find(key=>groups[key].includes(id));assert(category,id);
@@ -60,7 +63,7 @@ test('built demo starts in the system language, keeps code visible, and removes 
    assert.equal(doc.querySelectorAll('.category-picker button').length,6);
    assert.equal(doc.querySelector('.design-select'),null);
    assert.equal(doc.querySelector('.preview-heading'),null);
-   assert.equal(doc.querySelectorAll('.controls-column .composition-grid button').length,8);
+   assert.equal(doc.querySelectorAll('.controls-column .composition-grid button').length,9);
    for(const button of doc.querySelectorAll('.composition-grid button')){assert.equal(button.textContent.trim(),'');assert(button.getAttribute('aria-label'));}
    assert.equal(doc.querySelectorAll('.gallery,#catalog').length,0);
    assert.deepEqual(errors,[]);
@@ -102,7 +105,7 @@ test('all basic layouts and new compositions update the actual SVG and visible e
     assert(!doc.body.textContent.includes('undefined'),id);
    }
   }
-  assert.equal(seen.size,60);
+  assert.equal(seen.size,66);
   assert.deepEqual(errors,[]);
  }finally{dom.window.close();}
 });
@@ -245,7 +248,7 @@ test('Chuvash works automatically, persists manual choice and localizes every ca
    assert(/[ӑӗҫӳ]/.test(context.textContent),id);
    assert(!doc.body.textContent.includes('undefined'),id);
   }
-  assert.equal(seen.size,60);
+  assert.equal(seen.size,66);
   await choose(dom,doc,'motif');
   const motif=doc.querySelector('.motif-select select');assert.equal(motif.options.length,16);
   assert(motif.textContent.includes('Чӗре'));assert(motif.textContent.includes('Йывӑҫ'));

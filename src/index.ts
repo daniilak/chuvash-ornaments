@@ -112,3 +112,4 @@ export type { BookStudyId } from './reference-recipes.js';
 export { ELITE_STUDIES } from './elite-recipes.js';
 export type { EliteId } from './elite-recipes.js';
 export { CEREMONIAL_LAYOUTS } from './ceremonial-layouts.js';
+export { DEER_STUDIES, DEER_OUTLINE } from './deer-recipes.js';

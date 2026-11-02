@@ -9,7 +9,7 @@ import{ContextPreview,contextKind}from'./context-preview';
 import{svgUrl}from'./svg-url';
 import'./vendor/hemingway/style.css';
 import'./style.css';
-const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(40),...COMPOSITIONS.slice(24,40),...COMPOSITIONS.slice(18,24),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
+const choices:readonly {id:string;kind?:CompositionKind|'background'}[]=[...COMPOSITIONS.slice(49),...COMPOSITIONS.slice(40,49),...COMPOSITIONS.slice(24,40),...COMPOSITIONS.slice(18,24),...COMPOSITIONS.slice(12,18),...COMPOSITIONS.slice(6,12),...COMPOSITIONS.slice(0,6),...BACKGROUNDS.map(b=>({id:b.id,kind:'background' as const})),...['border','corners','band','divider','motif','tile'].map(id=>({id}))];
 const categories=['frame','band','headpiece','tailpiece','divider','background'] as const;
 function thumbnail(id:string,seed:number,color:string){
  const c=COMPOSITIONS.find(c=>c.id===id),background=BACKGROUNDS.find(b=>b.id===id);
@@ -39,10 +39,10 @@ function App(){
  useEffect(()=>{document.documentElement.lang=lang;document.title=t.title;document.querySelector('meta[name="description"]')?.setAttribute('content',t.description);},[lang,t]);
  useEffect(()=>{const update=()=>setLanguages(navigator.languages?.length?navigator.languages:[navigator.language]);window.addEventListener('languagechange',update);return()=>window.removeEventListener('languagechange',update);},[]);
  const language=(v:Preference)=>{setPref(v);try{v==='system'?localStorage.removeItem(storageKey):localStorage.setItem(storageKey,v);}catch{}};
- const[design,setDesign]=useState('keske-treasure-frame');
+ const[design,setDesign]=useState('deer-guardians');
  const[view,setView]=useState<'context'|'specimen'>('specimen');
  const[backgroundScale,setBackgroundScale]=useState(75);
- const[params,setParams]=useState<ParamsInput & {accentColor?:string}>({motif:'serdtse',seed:42,width:720,height:400,size:76,gap:12,count:128,strokeWidth:.36,color:'#762b32',accentColor:'#aa8247',fillOpacity:1,sequence:'seeded'});
+ const[params,setParams]=useState<ParamsInput & {accentColor?:string}>({motif:'serdtse',seed:42,width:720,height:220,size:200,gap:12,count:128,strokeWidth:.36,color:'#762b32',accentColor:'#aa8247',fillOpacity:1,sequence:'seeded'});
  const[notice,setNotice]=useState<'copied'|'copyFail'|'downloaded'|''>('');
  const recipe=COMPOSITIONS.find(c=>c.id===design),backgroundRecipe=BACKGROUNDS.find(b=>b.id===design);
  const book=BOOK_STUDIES.find(b=>b.id===design);
@@ -107,7 +107,7 @@ function App(){
      {twoTone&&<label className="color-field"><span>{t.accentColor}</span><div><input aria-label={t.accentColor} type="color" value={secondInk} onChange={e=>update({accentColor:e.target.value})}/><code>{secondInk}</code></div></label>}
      {tile&&<label className="field"><span>{t.backgroundScale}<output>{backgroundScale}<small> %</small></output></span><input aria-label={t.backgroundScale} type="range" min="40" max="160" step="5" value={backgroundScale} onChange={e=>setBackgroundScale(Number(e.target.value))}/></label>}
      {!motif&&slider(sizeName,'size',8,sizeLimit(design,q),1,'px')}
-     {!motif&&!rosette&&!backgroundRecipe&&book?.id!=='panel-headpiece'&&!elite?.id.includes('headpiece')&&recipe?.kind!=='separator'&&slider(t.gap,'gap',0,tile?Math.min(48,Math.max(0,Math.min(q.width,q.height)/(q.layout==='checkerboard'?2:1)-8)):48,1,'px')}
+     {!motif&&!rosette&&!backgroundRecipe&&recipe?.kind!=='divider'&&recipe?.kind!=='separator'&&slider(t.gap,'gap',0,tile?Math.min(48,Math.max(0,Math.min(q.width,q.height)/(q.layout==='checkerboard'?2:1)-8)):48,1,'px')}
      {(!rosette||!q.fill||!!elite)&&!(book?.id==='stitch-ribbon'&&q.fill)&&!(backgroundRecipe?.id==='stepped-carpet'&&q.fill)&&slider(t.stroke,'strokeWidth',.04,.8,.02)}
      {(fillMode==='outline'||fillMode==='hatch')&&<label className="checkbox"><input aria-label={fillMode==='hatch'?t.hatch:t.outline} type="checkbox" checked={fillMode==='hatch'?q.fill:!q.fill} onChange={e=>update({fill:fillMode==='hatch'?e.target.checked:!e.target.checked})}/><span>{fillMode==='hatch'?t.hatch:t.outline}</span></label>}
      {opacity&&slider(t.opacity,'fillOpacity',0,1,.01,'%')}
@@ -124,7 +124,7 @@ function App(){
     <div className={`preview ${view==='context'?'in-context':''}`} data-testid="preview">
      {view==='context'?<ContextPreview kind={contextKind(design,backgroundRecipe?'background':recipe?.kind)} result={result} inset={inset} lang={lang} repeatScale={backgroundScale/100}/>:tile?<div className="background-specimen" data-testid="tile-grid" style={{backgroundImage:`url("${svgUrl(result.svg)}")`,backgroundSize:repeatSize,backgroundPosition:'center'}}/>:<div className="art-stage" data-testid="art-stage" style={{aspectRatio:`${q.width}/${q.height}`,maxWidth:`${460*q.width/q.height}px`}}><SVG className="art-svg" svg={result.svg}/></div>}
     </div>
-    <div className="actions"><button onClick={download}>{t.download}</button><a data-testid="layouts-download" href={`${import.meta.env.BASE_URL}collection-layouts.png`} download="chuvash-frames-dividers-headpieces.png">{t.layoutCollection}</a><a data-testid="collection-download" href={`${import.meta.env.BASE_URL}collection-16.png`} download="chuvash-16-patterns.png">{t.collection}</a><span role="status">{notice?t[notice]:''}</span></div>
+    <div className="actions"><button onClick={download}>{t.download}</button><a data-testid="deer-download" href={`${import.meta.env.BASE_URL}collection-deer.png`} download="chuvash-deer-patterns.png">{t.deerCollection}</a><a data-testid="layouts-download" href={`${import.meta.env.BASE_URL}collection-layouts.png`} download="chuvash-frames-dividers-headpieces.png">{t.layoutCollection}</a><a data-testid="collection-download" href={`${import.meta.env.BASE_URL}collection-16.png`} download="chuvash-16-patterns.png">{t.collection}</a><span role="status">{notice?t[notice]:''}</span></div>
     <section className="code-panel" aria-label={t.code}><div className="code-heading"><h2>{t.code}</h2><button onClick={copyCode}>{t.copy}</button></div><pre data-testid="example-code"><code>{code}</code></pre></section>
     {baseFrame&&<section className="live-frame"><p>{t.resize}</p><Framed preset={design as'border'|'corners'} motif={q.motif} seed={q.seed} motifs={q.motifs} sequence={q.sequence} size={q.size} gap={q.gap} strokeWidth={q.strokeWidth} fill={q.fill} fillOpacity={q.fillOpacity} rotation={q.rotation} reflect={q.reflect} color={q.color} style={{resize:'both',overflow:'auto',width:'100%',maxWidth:'100%',minWidth:160,minHeight:180,height:240,background:'#fff'}}><h2>{t.cardTitle}</h2><p>{t.cardText}</p></Framed></section>}
    </div>
