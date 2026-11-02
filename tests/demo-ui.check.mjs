@@ -20,24 +20,28 @@ async function load(languages,stored){
 }
 function change(dom,element,value){element.value=value;element.dispatchEvent(new dom.window.Event('change',{bubbles:true}));}
 
-test('the published collection download contains the full horizontal image and uses a relative Pages path',async()=>{
+test('one neutral PNG selector downloads each collection and resets without inline archive links',async()=>{
  const {dom,doc}=await load(['ru-RU']);
+ const click=dom.window.HTMLAnchorElement.prototype.click,downloads=[];
+ dom.window.HTMLAnchorElement.prototype.click=function(){downloads.push({href:this.getAttribute('href'),filename:this.download});};
  try{
-  const link=doc.querySelector('[data-testid=collection-download]');
-  assert.equal(link.getAttribute('href'),'./collection-16.png');
-  assert.equal(link.getAttribute('download'),'chuvash-16-patterns.png');
-  const png=readFileSync(new URL('../demo-dist/collection-16.png',import.meta.url));
-  assert.equal(png.readUInt32BE(16),4800);assert.equal(png.readUInt32BE(20),2700);
-  assert.deepEqual(png,readFileSync(new URL('../docs/brocade-review/all-sixteen-horizontal.png',import.meta.url)));
+  const select=doc.querySelector('[data-testid=png-download]');
+  assert.equal(select.getAttribute('aria-label'),'Скачать PNG');
+  assert.equal(select.value,'');assert.equal(select.options.length,4);
+  assert.equal(doc.querySelectorAll('.actions a').length,0);
+  for(const value of ['deer','layouts','original']){change(dom,select,value);await pause();assert.equal(select.value,'');}
+  assert.deepEqual(downloads,[
+   {href:'./collection-deer.png',filename:'chuvash-deer-patterns.png'},
+   {href:'./collection-layouts.png',filename:'chuvash-frames-dividers-headpieces.png'},
+   {href:'./collection-16.png',filename:'chuvash-16-patterns.png'},
+  ]);
+  for(const [name,width,height]of [['collection-deer',3600,1800],['collection-layouts',3600,2200],['collection-16',4800,2700]]){
+   const png=readFileSync(new URL('../demo-dist/'+name+'.png',import.meta.url));
+   assert.equal(png.readUInt32BE(16),width);assert.equal(png.readUInt32BE(20),height);
+  }
+  assert.deepEqual(readFileSync(new URL('../demo-dist/collection-16.png',import.meta.url)),readFileSync(new URL('../docs/brocade-review/all-sixteen-horizontal.png',import.meta.url)));
   assert.equal(doc.querySelector('.preview article'),null);
-  const layouts=doc.querySelector('[data-testid=layouts-download]');
-  assert.equal(layouts.getAttribute('href'),'./collection-layouts.png');
-  const newPng=readFileSync(new URL('../demo-dist/collection-layouts.png',import.meta.url));
-  assert.equal(newPng.readUInt32BE(16),3600);assert.equal(newPng.readUInt32BE(20),2200);
-  assert.equal(doc.querySelector('[data-testid=deer-download]').getAttribute('href'),'./collection-deer.png');
-  const deer=readFileSync(new URL('../demo-dist/collection-deer.png',import.meta.url));
-  assert.equal(deer.readUInt32BE(16),3600);assert.equal(deer.readUInt32BE(20),1800);
- }finally{dom.window.close();}
+ }finally{dom.window.HTMLAnchorElement.prototype.click=click;dom.window.close();}
 });
 
 const groups={

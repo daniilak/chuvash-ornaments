@@ -43,6 +43,8 @@ input[type=checkbox]{appearance:auto;width:18px;height:18px;margin:0;accent-colo
 .actions{display:flex;align-items:center;gap:16px;margin:16px 0 28px;flex-wrap:wrap}
 .actions button{background:#30343a;color:#fff;border-color:#30343a}
 .actions button:hover{background:#4a5059}
+.actions .png-download{width:auto;max-width:100%;height:42px;min-width:165px;padding:8px 32px 8px 12px;background-color:#fff;color:var(--ink);border:1px solid #b8bec6;font-size:14px;font-weight:600}
+.actions .png-download:hover{background-color:#f3f4f6;border-color:#747b85}
 .actions [role=status]{font-size:14px;line-height:1.5;color:var(--muted)}
 .code-panel{min-width:0}
 .code-heading{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:13px}
