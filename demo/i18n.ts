@@ -192,7 +192,13 @@ export const chuvashDesignNames:Record<string,string>={
   "deer-tapestry-frame": "Пӑлан рамки",
   "wedding-cloth-frame": "Туй рамки",
   "masmak-tiered-band": "Масмак",
-  "sara-paired-tailpiece": "Сарӑ"
+  "sara-paired-tailpiece": "Сарӑ",
+  "brocade-corners": "Кӗскӗллӗ кӗтессем",
+  "garden-corners": "Туратлӑ кӗтессем",
+  "lattice-corners": "Кӗтес тӗрри",
+  "embroidered-knot-divider": "Тӗрӗллӗ тӗвӗ",
+  "paired-bloom-divider": "Чечеклӗ уйӑру",
+  "stepped-lace-divider": "Пусмаллӑ уйӑру"
 };
 export const chuvashBackgrounds:Record<string,string>={
   "lozenge-net": "Ромблӑ сетка",

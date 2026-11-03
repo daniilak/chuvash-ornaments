@@ -115,3 +115,4 @@ export { CEREMONIAL_LAYOUTS } from './ceremonial-layouts.js';
 export { DEER_STUDIES, DEER_OUTLINE } from './deer-recipes.js';
 
 export { TEXTILE_STUDIES } from './textile-recipes.js';
+export { CORNER_DIVIDER_STUDIES } from './corner-divider-recipes.js';

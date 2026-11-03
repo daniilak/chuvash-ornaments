@@ -33,9 +33,9 @@ test('download actions offer only the current pattern in SVG and PNG, with no ar
 });
 
 const groups={
- frame:['wedding-cloth-frame','deer-tapestry-frame','keske-treasure-frame','horn-gate-frame','heart-diadem-frame','ceremonial-frame','lozenge-frame','book-frame','border','corners'],
+ frame:['brocade-corners','garden-corners','lattice-corners','wedding-cloth-frame','deer-tapestry-frame','keske-treasure-frame','horn-gate-frame','heart-diadem-frame','ceremonial-frame','lozenge-frame','book-frame','border','corners'],
  band:['masmak-tiered-band','deer-procession','deer-and-suns','embroidered-treasury','horn-lace','braided-hearts','double-horn','scarlet-lattice','heirloom-chain','stitch-ribbon','nested-chevrons','stepped-scrolls','diagonal-scrolls','forked-frieze','lozenge-ligature','toothed-diamonds','horn-band','comb-band','hooked-meander','hatched-diamonds','diamond-ribbon','stepped-frieze','paired-birds','keske-lace','sun-weave','tree-procession','band'],
- headpiece:['deer-guardians','deer-crest','sovereign-headpiece','procession-headpiece','heart-canopy-headpiece','regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['sara-paired-tailpiece','imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['deer-sun-divider','sun-needle-divider','wing-knot-divider','triple-keske-divider','divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
+ headpiece:['deer-guardians','deer-crest','sovereign-headpiece','procession-headpiece','heart-canopy-headpiece','regal-headpiece','winged-headpiece','panel-headpiece','ceremonial-tree'],tailpiece:['sara-paired-tailpiece','imperial-keske','eightfold-brooch','heart-tapestry','keske-crown','heart-knot','sun-chamber','keske-signet','branch-medallion','comb-rosette','hooked-rosette','motif'],divider:['embroidered-knot-divider','paired-bloom-divider','stepped-lace-divider','deer-sun-divider','sun-needle-divider','wing-knot-divider','triple-keske-divider','divider'],background:['lozenge-net','keske-field','stepped-carpet','woven-lattice','cross-stitch','tile'],
 };
 async function choose(dom,doc,id){
  const category=Object.keys(groups).find(key=>groups[key].includes(id));assert(category,id);
@@ -97,7 +97,7 @@ test('all basic layouts and new compositions update the actual SVG and visible e
     assert(!doc.body.textContent.includes('undefined'),id);
    }
   }
-  assert.equal(seen.size,69);
+  assert.equal(seen.size,75);
   assert.deepEqual(errors,[]);
  }finally{dom.window.close();}
 });
@@ -136,7 +136,7 @@ test('in-context examples follow the ornament role, with real localized text',as
   assert.equal(doc.querySelector('.preview-mode button[aria-pressed=true]').textContent,'Specimen');
   assert.equal(doc.querySelector('.preview article'),null);
   [...doc.querySelectorAll('.preview-mode button')].find(b=>b.textContent==='In context').click();await waitFor(()=>doc.querySelector('[data-context]'));
-  for(const[design,role]of[['lozenge-ligature','band'],['ceremonial-tree','headpiece'],['branch-medallion','tailpiece'],['divider','divider'],['sun-needle-divider','divider'],['triple-keske-divider','divider'],['sovereign-headpiece','headpiece'],['horn-gate-frame','frame'],['lozenge-frame','frame'],['wedding-cloth-frame','frame'],['masmak-tiered-band','band'],['sara-paired-tailpiece','tailpiece'],['tile','background']]){
+  for(const[design,role]of[['lozenge-ligature','band'],['ceremonial-tree','headpiece'],['branch-medallion','tailpiece'],['divider','divider'],['sun-needle-divider','divider'],['triple-keske-divider','divider'],['sovereign-headpiece','headpiece'],['horn-gate-frame','frame'],['lozenge-frame','frame'],['wedding-cloth-frame','frame'],['brocade-corners','frame'],['garden-corners','frame'],['lattice-corners','frame'],['embroidered-knot-divider','divider'],['paired-bloom-divider','divider'],['stepped-lace-divider','divider'],['masmak-tiered-band','band'],['sara-paired-tailpiece','tailpiece'],['tile','background']]){
    await choose(dom,doc,design);await waitFor(()=>doc.querySelector('[data-context]')?.dataset.context===role);
    const page=doc.querySelector('[data-context]');
    assert(page.querySelector('h2'));assert(page.querySelector('p:not(.context-chapter)').textContent.length>30);
@@ -240,7 +240,7 @@ test('Chuvash works automatically, persists manual choice and localizes every ca
    assert(/[ӑӗҫӳ]/.test(context.textContent),id);
    assert(!doc.body.textContent.includes('undefined'),id);
   }
-  assert.equal(seen.size,69);
+  assert.equal(seen.size,75);
   await choose(dom,doc,'motif');
   const motif=doc.querySelector('.motif-select select');assert.equal(motif.options.length,16);
   assert(motif.textContent.includes('Чӗре'));assert(motif.textContent.includes('Йывӑҫ'));

@@ -8,7 +8,7 @@ import { Composition } from '../dist/react.js';
 
 test('new compositions preserve source data and roundtrip complete versioned parameters',()=>{
  const before=JSON.stringify(MOTIFS);
- assert.equal(COMPOSITIONS.length,58);
+ assert.equal(COMPOSITIONS.length,64);
  for(const {id:composition} of COMPOSITIONS)for(const seed of [0,7,42]){
   const result=generateComposition({composition,seed,color:'#8b1a1a'});
   assert.equal(result.svg,generateComposition(JSON.parse(JSON.stringify(result.params))).svg);

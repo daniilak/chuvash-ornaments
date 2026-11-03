@@ -41,7 +41,9 @@ export function sizeLimit(design:string,p:Pick<Params,'width'|'height'|'gap'|'la
  const W=p.width,H=p.height;
  let maximum:number;
  const background=BACKGROUNDS.find(b=>b.id===design);
- if(design==='wedding-cloth-frame')maximum=Math.min(W,H)*.16;
+ if(design.endsWith('-corners'))maximum=Math.min(W,H)*.38;
+ else if(['embroidered-knot-divider','paired-bloom-divider','stepped-lace-divider'].includes(design))maximum=96*Math.min(H*.8/96,W*.9/340);
+ else if(design==='wedding-cloth-frame')maximum=Math.min(W,H)*.16;
  else if(design==='masmak-tiered-band')maximum=Math.min(H*.86,W*1.5);
  else if(design==='sara-paired-tailpiece')maximum=680*Math.min(W*.94/1100,H*.9/680);
  else if(design==='winged-headpiece')maximum=52*Math.min(W*.9/148,H*.8/52);

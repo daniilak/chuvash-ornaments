@@ -9,6 +9,7 @@ import { BROCADE_STUDIES, renderBrocadeRecipe } from './brocade-recipes.js';
 import { CEREMONIAL_LAYOUTS, renderCeremonialLayout } from './ceremonial-layouts.js';
 import { DEER_STUDIES, renderDeerRecipe } from './deer-recipes.js';
 import { TEXTILE_STUDIES, renderTextileRecipe } from './textile-recipes.js';
+import { CORNER_DIVIDER_STUDIES, renderCornerDividerRecipe } from './corner-divider-recipes.js';
 
 /** Contemporary ceremonial studies; names do not assert historical provenance. */
 export const ELITE_STUDIES = Object.freeze(([
@@ -21,6 +22,7 @@ export const ELITE_STUDIES = Object.freeze(([
   ...CEREMONIAL_LAYOUTS,
   ...DEER_STUDIES,
   ...TEXTILE_STUDIES,
+  ...CORNER_DIVIDER_STUDIES,
 ] as const).map(item=>Object.freeze({...item,name:Object.freeze(item.name)})));
 export type EliteId = typeof ELITE_STUDIES[number]['id'];
 export const ELITE_COLOR='#762b32', ELITE_ACCENT='#aa8247';
@@ -34,6 +36,7 @@ const stepRing:Polygon=[
 ];
 
 export function renderEliteRecipe(d:Drawing,p:CompositionParams,studies:StudyPlacement[]):FrameResult['inset']|undefined{
+  if(CORNER_DIVIDER_STUDIES.some(b=>b.id===p.composition))return renderCornerDividerRecipe(d,p,studies);
   if(TEXTILE_STUDIES.some(b=>b.id===p.composition))return renderTextileRecipe(d,p,studies);
   if(DEER_STUDIES.some(b=>b.id===p.composition))return renderDeerRecipe(d,p,studies);
   if(CEREMONIAL_LAYOUTS.some(b=>b.id===p.composition))return renderCeremonialLayout(d,p,studies);
